@@ -2,10 +2,13 @@
 
 namespace Salable;
 
-use Microsoft\Kiota\Abstractions\Authentication\ApiKeyAuthenticationProvider;
-use Microsoft\Kiota\Abstractions\Authentication\KeyLocation;
+use Http\Promise\FulfilledPromise;
+use Http\Promise\Promise;
+use Microsoft\Kiota\Abstractions\Authentication\AccessTokenProvider;
+use Microsoft\Kiota\Abstractions\Authentication\AllowedHostsValidator;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
-use Salable\SDK\SalableClient;
+use Salable\SDK\Salable as SalableClient;
 
 class Salable
 {
@@ -13,13 +16,25 @@ class Salable
 
     public function __construct(string $apiKey)
     {
-        $authProvider = new ApiKeyAuthenticationProvider(
-            'Bearer ' . $apiKey,
-            'Authorization',
-            KeyLocation::Header
-        );
+        $tokenProvider = new class ($apiKey) implements AccessTokenProvider {
+            public function __construct(private readonly string $apiKey)
+            {
+            }
+
+            public function getAuthorizationTokenAsync(string $url, array $additionalAuthenticationContext = []): Promise
+            {
+                return new FulfilledPromise($this->apiKey);
+            }
+
+            public function getAllowedHostsValidator(): AllowedHostsValidator
+            {
+                return new AllowedHostsValidator(['salable.app']);
+            }
+        };
+
+        $authProvider = new BaseBearerTokenAuthenticationProvider($tokenProvider);
         $adapter = new GuzzleRequestAdapter($authProvider);
         $client = new SalableClient($adapter);
-        $this->api = $client->getApi();
+        $this->api = $client->api();
     }
 }
