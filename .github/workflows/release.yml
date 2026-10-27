@@ -2,20 +2,81 @@ name: Release SDK
 
 on:
   push:
-    branches: [main]
+    branches: [main, beta]
   workflow_dispatch:
+    inputs:
+      spec_change:
+        description: Conventional commit type when this run should record a spec change. Choose none to release commits that are already on the branch.
+        required: true
+        default: none
+        type: choice
+        options:
+          - none
+          - feat
+          - fix
+          - breaking
 
 jobs:
+  test:
+    name: Test PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ["8.2", "8.3", "8.4", "8.5"]
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Check formatting
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: Static analysis
+        run: vendor/bin/phpstan analyse --no-progress
+
+      - name: Test
+        run: vendor/bin/phpunit
+
+  drift:
+    name: Generated client matches pinned spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: microsoft/setup-kiota@v0.5.0
+        with:
+          version: v1.35.0
+
+      - name: Regenerate and fail on drift
+        run: |
+          ./scripts/generate.sh
+          git diff --exit-code
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --porcelain
+            git diff
+            exit 1
+          fi
+
   release:
     name: Release
+    needs: [test, drift]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
       issues: write
     steps:
-      - uses: microsoft/setup-kiota@v0.5.0
-
       - name: Generate token
         id: generate_token
         uses: actions/create-github-app-token@v3
@@ -30,30 +91,31 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version: "24"
+          cache: npm
 
       - name: Install semantic-release
-        run: npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+        run: npm ci
 
-      - name: Fetch OpenAPI spec
-        run: |
-          curl -L --fail \
-            https://salable.app/openapi.yaml \
-            -o openapi.yaml
-
-      - name: Generate SDK with Kiota
-        run: |
-          kiota generate --openapi ./openapi.yaml -o ./src/SDK --language php --class-name Salable --clean-output --namespace-name Salable\\SDK
-
-      - name: Commit for semantic release
-        if: github.event_name == 'workflow_dispatch'
+      - name: Record spec change
+        if: github.event_name == 'workflow_dispatch' && inputs.spec_change != 'none'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit --allow-empty -m "fix: openapi spec updated"
+          case "${{ inputs.spec_change }}" in
+            feat)
+              git commit --allow-empty -m "feat: openapi spec updated"
+              ;;
+            fix)
+              git commit --allow-empty -m "fix: openapi spec updated"
+              ;;
+            breaking)
+              git commit --allow-empty -m "feat!: openapi spec updated" -m "BREAKING CHANGE: OpenAPI spec update"
+              ;;
+          esac
+          git push origin HEAD
 
       - name: Release
-        id: release
-        run: semantic-release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
