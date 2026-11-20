@@ -96,6 +96,26 @@ class SavePlanRequestSchemaLineItems implements AdditionalDataHolder, Parsable
     private ?SavePlanRequestSchemaLineItems_tiersMode $tiersMode = null;
     
     /**
+     * @var int|null $tokenExpiryDays The tokenExpiryDays property
+    */
+    private ?int $tokenExpiryDays = null;
+    
+    /**
+     * @var int|null $tokenQuantity The tokenQuantity property
+    */
+    private ?int $tokenQuantity = null;
+    
+    /**
+     * @var SavePlanRequestSchemaLineItems_tokenResetBehaviour|null $tokenResetBehaviour The tokenResetBehaviour property
+    */
+    private ?SavePlanRequestSchemaLineItems_tokenResetBehaviour $tokenResetBehaviour = null;
+    
+    /**
+     * @var string|null $tokenSlug The tokenSlug property
+    */
+    private ?string $tokenSlug = null;
+    
+    /**
      * @var string|null $unitLabel The unitLabel property
     */
     private ?string $unitLabel = null;
@@ -174,6 +194,10 @@ class SavePlanRequestSchemaLineItems implements AdditionalDataHolder, Parsable
             'priceType' => fn(ParseNode $n) => $o->setPriceType($n->getEnumValue(SavePlanRequestSchemaLineItems_priceType::class)),
             'slug' => fn(ParseNode $n) => $o->setSlug($n->getStringValue()),
             'tiersMode' => fn(ParseNode $n) => $o->setTiersMode($n->getEnumValue(SavePlanRequestSchemaLineItems_tiersMode::class)),
+            'tokenExpiryDays' => fn(ParseNode $n) => $o->setTokenExpiryDays($n->getIntegerValue()),
+            'tokenQuantity' => fn(ParseNode $n) => $o->setTokenQuantity($n->getIntegerValue()),
+            'tokenResetBehaviour' => fn(ParseNode $n) => $o->setTokenResetBehaviour($n->getEnumValue(SavePlanRequestSchemaLineItems_tokenResetBehaviour::class)),
+            'tokenSlug' => fn(ParseNode $n) => $o->setTokenSlug($n->getStringValue()),
             'unitLabel' => fn(ParseNode $n) => $o->setUnitLabel($n->getStringValue()),
         ];
     }
@@ -283,6 +307,38 @@ class SavePlanRequestSchemaLineItems implements AdditionalDataHolder, Parsable
     }
 
     /**
+     * Gets the tokenExpiryDays property value. The tokenExpiryDays property
+     * @return int|null
+    */
+    public function getTokenExpiryDays(): ?int {
+        return $this->tokenExpiryDays;
+    }
+
+    /**
+     * Gets the tokenQuantity property value. The tokenQuantity property
+     * @return int|null
+    */
+    public function getTokenQuantity(): ?int {
+        return $this->tokenQuantity;
+    }
+
+    /**
+     * Gets the tokenResetBehaviour property value. The tokenResetBehaviour property
+     * @return SavePlanRequestSchemaLineItems_tokenResetBehaviour|null
+    */
+    public function getTokenResetBehaviour(): ?SavePlanRequestSchemaLineItems_tokenResetBehaviour {
+        return $this->tokenResetBehaviour;
+    }
+
+    /**
+     * Gets the tokenSlug property value. The tokenSlug property
+     * @return string|null
+    */
+    public function getTokenSlug(): ?string {
+        return $this->tokenSlug;
+    }
+
+    /**
      * Gets the unitLabel property value. The unitLabel property
      * @return string|null
     */
@@ -311,6 +367,10 @@ class SavePlanRequestSchemaLineItems implements AdditionalDataHolder, Parsable
         $writer->writeEnumValue('priceType', $this->getPriceType());
         $writer->writeStringValue('slug', $this->getSlug());
         $writer->writeEnumValue('tiersMode', $this->getTiersMode());
+        $writer->writeIntegerValue('tokenExpiryDays', $this->getTokenExpiryDays());
+        $writer->writeIntegerValue('tokenQuantity', $this->getTokenQuantity());
+        $writer->writeEnumValue('tokenResetBehaviour', $this->getTokenResetBehaviour());
+        $writer->writeStringValue('tokenSlug', $this->getTokenSlug());
         $writer->writeStringValue('unitLabel', $this->getUnitLabel());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -449,6 +509,38 @@ class SavePlanRequestSchemaLineItems implements AdditionalDataHolder, Parsable
     */
     public function setTiersMode(?SavePlanRequestSchemaLineItems_tiersMode $value): void {
         $this->tiersMode = $value;
+    }
+
+    /**
+     * Sets the tokenExpiryDays property value. The tokenExpiryDays property
+     * @param int|null $value Value to set for the tokenExpiryDays property.
+    */
+    public function setTokenExpiryDays(?int $value): void {
+        $this->tokenExpiryDays = $value;
+    }
+
+    /**
+     * Sets the tokenQuantity property value. The tokenQuantity property
+     * @param int|null $value Value to set for the tokenQuantity property.
+    */
+    public function setTokenQuantity(?int $value): void {
+        $this->tokenQuantity = $value;
+    }
+
+    /**
+     * Sets the tokenResetBehaviour property value. The tokenResetBehaviour property
+     * @param SavePlanRequestSchemaLineItems_tokenResetBehaviour|null $value Value to set for the tokenResetBehaviour property.
+    */
+    public function setTokenResetBehaviour(?SavePlanRequestSchemaLineItems_tokenResetBehaviour $value): void {
+        $this->tokenResetBehaviour = $value;
+    }
+
+    /**
+     * Sets the tokenSlug property value. The tokenSlug property
+     * @param string|null $value Value to set for the tokenSlug property.
+    */
+    public function setTokenSlug(?string $value): void {
+        $this->tokenSlug = $value;
     }
 
     /**

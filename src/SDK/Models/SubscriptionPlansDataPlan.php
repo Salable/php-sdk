@@ -55,9 +55,9 @@ class SubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
     private ?string $productId = null;
     
     /**
-     * @var PlanTierTag|null $tierTag The tierTag property
+     * @var DataPlanTierTag|null $tierTag The tierTag property
     */
-    private ?PlanTierTag $tierTag = null;
+    private ?DataPlanTierTag $tierTag = null;
     
     /**
      * @var SubscriptionPlansDataPlan_tierTagId|null $tierTagId The tierTagId property
@@ -129,7 +129,7 @@ class SubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
             'productId' => fn(ParseNode $n) => $o->setProductId($n->getStringValue()),
-            'tierTag' => fn(ParseNode $n) => $o->setTierTag($n->getObjectValue([PlanTierTag::class, 'createFromDiscriminatorValue'])),
+            'tierTag' => fn(ParseNode $n) => $o->setTierTag($n->getObjectValue([DataPlanTierTag::class, 'createFromDiscriminatorValue'])),
             'tierTagId' => fn(ParseNode $n) => $o->setTierTagId($n->getObjectValue([SubscriptionPlansDataPlan_tierTagId::class, 'createFromDiscriminatorValue'])),
             'trialPeriodDays' => fn(ParseNode $n) => $o->setTrialPeriodDays($n->getObjectValue([SubscriptionPlansDataPlan_trialPeriodDays::class, 'createFromDiscriminatorValue'])),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
@@ -186,9 +186,9 @@ class SubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the tierTag property value. The tierTag property
-     * @return PlanTierTag|null
+     * @return DataPlanTierTag|null
     */
-    public function getTierTag(): ?PlanTierTag {
+    public function getTierTag(): ?DataPlanTierTag {
         return $this->tierTag;
     }
 
@@ -310,9 +310,9 @@ class SubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the tierTag property value. The tierTag property
-     * @param PlanTierTag|null $value Value to set for the tierTag property.
+     * @param DataPlanTierTag|null $value Value to set for the tierTag property.
     */
-    public function setTierTag(?PlanTierTag $value): void {
+    public function setTierTag(?DataPlanTierTag $value): void {
         $this->tierTag = $value;
     }
 

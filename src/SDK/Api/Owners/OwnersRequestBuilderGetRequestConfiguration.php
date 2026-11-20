@@ -33,11 +33,12 @@ class OwnersRequestBuilderGetRequestConfiguration extends BaseRequestConfigurati
      * @param array<GetExpandQueryParameterType>|null $expand 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @param string|null $search 
-     * @param string|null $stripeCustomerId 
+     * @param string|null $stripeCustomer Filter by Stripe customer ID.
+     * @param string|null $stripeCustomerId Deprecated: use `stripeCustomer` instead.
      * @return OwnersRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?string $search = null, ?string $stripeCustomerId = null): OwnersRequestBuilderGetQueryParameters {
-        return new OwnersRequestBuilderGetQueryParameters($after, $before, $expand, $limit, $search, $stripeCustomerId);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?string $search = null, ?string $stripeCustomer = null, ?string $stripeCustomerId = null): OwnersRequestBuilderGetQueryParameters {
+        return new OwnersRequestBuilderGetQueryParameters($after, $before, $expand, $limit, $search, $stripeCustomer, $stripeCustomerId);
     }
 
 }

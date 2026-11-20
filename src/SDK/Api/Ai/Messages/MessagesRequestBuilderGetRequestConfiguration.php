@@ -30,12 +30,13 @@ class MessagesRequestBuilderGetRequestConfiguration extends BaseRequestConfigura
      * Instantiates a new MessagesRequestBuilderGetQueryParameters.
      * @param string|null $after 
      * @param string|null $before 
-     * @param string|null $conversationId Returns only messages belonging to this conversation ID.
+     * @param string|null $conversation Returns only messages belonging to this conversation ID.
+     * @param string|null $conversationId Deprecated: use `conversation` instead.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @return MessagesRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $conversationId = null, ?int $limit = null): MessagesRequestBuilderGetQueryParameters {
-        return new MessagesRequestBuilderGetQueryParameters($after, $before, $conversationId, $limit);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $conversation = null, ?string $conversationId = null, ?int $limit = null): MessagesRequestBuilderGetQueryParameters {
+        return new MessagesRequestBuilderGetQueryParameters($after, $before, $conversation, $conversationId, $limit);
     }
 
 }

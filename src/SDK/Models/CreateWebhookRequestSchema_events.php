@@ -12,4 +12,8 @@ class CreateWebhookRequestSchema_events extends Enum {
     public const USAGE_RECORDED = "usage_recorded";
     public const RECEIPT_CREATED = "receipt_created";
     public const OWNER_UPDATED = "owner_updated";
+    public const TOKENS_ACCRUED = "tokens_accrued";
+    public const TOKENS_CONSUMED = "tokens_consumed";
+    public const TOKENS_OVERAGE = "tokens_overage";
+    public const TOKENS_EXPIRED = "tokens_expired";
 }

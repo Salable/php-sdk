@@ -30,12 +30,13 @@ class DestinationsRequestBuilderGetRequestConfiguration extends BaseRequestConfi
      * Instantiates a new DestinationsRequestBuilderGetQueryParameters.
      * @param string|null $after 
      * @param string|null $before 
-     * @param string|null $eventId Returns only destinations linked to this event ID.
+     * @param string|null $event Returns only destinations linked to this event ID.
+     * @param string|null $eventId Deprecated: use `event` instead.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @return DestinationsRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $eventId = null, ?int $limit = null): DestinationsRequestBuilderGetQueryParameters {
-        return new DestinationsRequestBuilderGetQueryParameters($after, $before, $eventId, $limit);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $event = null, ?string $eventId = null, ?int $limit = null): DestinationsRequestBuilderGetQueryParameters {
+        return new DestinationsRequestBuilderGetQueryParameters($after, $before, $event, $eventId, $limit);
     }
 
 }

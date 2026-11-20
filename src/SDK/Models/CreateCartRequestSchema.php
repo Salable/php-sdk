@@ -53,7 +53,7 @@ class CreateCartRequestSchema implements Parsable
         $o = $this;
         return  [
             'currency' => fn(ParseNode $n) => $o->setCurrency($n->getEnumValue(CreateCartRequestSchema_currency::class)),
-            'interval' => fn(ParseNode $n) => $o->setInterval($n->getEnumValue(CreateCartRequestSchema_interval::class)),
+            'interval' => fn(ParseNode $n) => $o->setInterval($n->getObjectValue([CreateCartRequestSchema_interval::class, 'createFromDiscriminatorValue'])),
             'intervalCount' => fn(ParseNode $n) => $o->setIntervalCount($n->getFloatValue()),
             'owner' => fn(ParseNode $n) => $o->setOwner($n->getStringValue()),
         ];
@@ -89,7 +89,7 @@ class CreateCartRequestSchema implements Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeEnumValue('currency', $this->getCurrency());
-        $writer->writeEnumValue('interval', $this->getInterval());
+        $writer->writeObjectValue('interval', $this->getInterval());
         $writer->writeFloatValue('intervalCount', $this->getIntervalCount());
         $writer->writeStringValue('owner', $this->getOwner());
     }

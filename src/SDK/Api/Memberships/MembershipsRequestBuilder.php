@@ -34,7 +34,7 @@ class MembershipsRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/memberships{?expand}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/memberships{?after*,before*,expand,grantee*,granteeId*,limit*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

@@ -18,7 +18,12 @@ class EventAttemptsRequestBuilderGetQueryParameters
     public ?string $before = null;
     
     /**
-     * @var string|null $destinationId 
+     * @var string|null $destination Filter by destination ID.
+    */
+    public ?string $destination = null;
+    
+    /**
+     * @var string|null $destinationId Deprecated: use `destination` instead.
     */
     public ?string $destinationId = null;
     
@@ -31,12 +36,14 @@ class EventAttemptsRequestBuilderGetQueryParameters
      * Instantiates a new EventAttemptsRequestBuilderGetQueryParameters and sets the default values.
      * @param string|null $after 
      * @param string|null $before 
-     * @param string|null $destinationId 
+     * @param string|null $destination Filter by destination ID.
+     * @param string|null $destinationId Deprecated: use `destination` instead.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
     */
-    public function __construct(?string $after = null, ?string $before = null, ?string $destinationId = null, ?int $limit = null) {
+    public function __construct(?string $after = null, ?string $before = null, ?string $destination = null, ?string $destinationId = null, ?int $limit = null) {
         $this->after = $after;
         $this->before = $before;
+        $this->destination = $destination;
         $this->destinationId = $destinationId;
         $this->limit = $limit;
     }

@@ -28,9 +28,14 @@ class GroupsRequestBuilderGetQueryParameters
     public ?int $limit = null;
     
     /**
-     * @var string|null $owner 
+     * @var string|null $owner Filter by owner ID or value.
     */
     public ?string $owner = null;
+    
+    /**
+     * @var string|null $search Search by group name.
+    */
+    public ?string $search = null;
     
     /**
      * Instantiates a new GroupsRequestBuilderGetQueryParameters and sets the default values.
@@ -38,14 +43,16 @@ class GroupsRequestBuilderGetQueryParameters
      * @param string|null $before 
      * @param array<GetExpandQueryParameterType>|null $expand 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param string|null $owner 
+     * @param string|null $owner Filter by owner ID or value.
+     * @param string|null $search Search by group name.
     */
-    public function __construct(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?string $owner = null) {
+    public function __construct(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?string $owner = null, ?string $search = null) {
         $this->after = $after;
         $this->before = $before;
         $this->expand = $expand?? [];
         $this->limit = $limit;
         $this->owner = $owner;
+        $this->search = $search;
     }
 
 }

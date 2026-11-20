@@ -9,12 +9,12 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class CreateGranteeRequestSchema implements Parsable 
 {
     /**
-     * @var string|null $granteeId The granteeId property
+     * @var string|null $granteeId The ID of the entity receiving access in your system, like a user ID or workspace ID.
     */
     private ?string $granteeId = null;
     
     /**
-     * @var string|null $name The name property
+     * @var string|null $name A readable name to identify the grantee.
     */
     private ?string $name = null;
     
@@ -40,7 +40,7 @@ class CreateGranteeRequestSchema implements Parsable
     }
 
     /**
-     * Gets the granteeId property value. The granteeId property
+     * Gets the granteeId property value. The ID of the entity receiving access in your system, like a user ID or workspace ID.
      * @return string|null
     */
     public function getGranteeId(): ?string {
@@ -48,7 +48,7 @@ class CreateGranteeRequestSchema implements Parsable
     }
 
     /**
-     * Gets the name property value. The name property
+     * Gets the name property value. A readable name to identify the grantee.
      * @return string|null
     */
     public function getName(): ?string {
@@ -65,7 +65,7 @@ class CreateGranteeRequestSchema implements Parsable
     }
 
     /**
-     * Sets the granteeId property value. The granteeId property
+     * Sets the granteeId property value. The ID of the entity receiving access in your system, like a user ID or workspace ID.
      * @param string|null $value Value to set for the granteeId property.
     */
     public function setGranteeId(?string $value): void {
@@ -73,7 +73,7 @@ class CreateGranteeRequestSchema implements Parsable
     }
 
     /**
-     * Sets the name property value. The name property
+     * Sets the name property value. A readable name to identify the grantee.
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {

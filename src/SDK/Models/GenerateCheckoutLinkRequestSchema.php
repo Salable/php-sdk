@@ -49,7 +49,7 @@ class GenerateCheckoutLinkRequestSchema implements Parsable
     private ?string $email = null;
     
     /**
-     * @var GenerateCheckoutLinkRequestSchema_paymentMethodCollection|null $paymentMethodCollection Controls whether Stripe always collects a payment method for subscription Checkout or only collects one when payment is due. If any plans contain one-off line items, the payment method collection will fallback to `always`. Defaults to `always`.
+     * @var GenerateCheckoutLinkRequestSchema_paymentMethodCollection|null $paymentMethodCollection Whether a card is required at checkout. Applies only when trial days are set on a plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless but cannot be used if any one-off line items are included on any of the plans. This is only required when the plans' parent product settings have differing trial card behaviour.
     */
     private ?GenerateCheckoutLinkRequestSchema_paymentMethodCollection $paymentMethodCollection = null;
     
@@ -158,7 +158,7 @@ class GenerateCheckoutLinkRequestSchema implements Parsable
     }
 
     /**
-     * Gets the paymentMethodCollection property value. Controls whether Stripe always collects a payment method for subscription Checkout or only collects one when payment is due. If any plans contain one-off line items, the payment method collection will fallback to `always`. Defaults to `always`.
+     * Gets the paymentMethodCollection property value. Whether a card is required at checkout. Applies only when trial days are set on a plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless but cannot be used if any one-off line items are included on any of the plans. This is only required when the plans' parent product settings have differing trial card behaviour.
      * @return GenerateCheckoutLinkRequestSchema_paymentMethodCollection|null
     */
     public function getPaymentMethodCollection(): ?GenerateCheckoutLinkRequestSchema_paymentMethodCollection {
@@ -264,7 +264,7 @@ class GenerateCheckoutLinkRequestSchema implements Parsable
     }
 
     /**
-     * Sets the paymentMethodCollection property value. Controls whether Stripe always collects a payment method for subscription Checkout or only collects one when payment is due. If any plans contain one-off line items, the payment method collection will fallback to `always`. Defaults to `always`.
+     * Sets the paymentMethodCollection property value. Whether a card is required at checkout. Applies only when trial days are set on a plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless but cannot be used if any one-off line items are included on any of the plans. This is only required when the plans' parent product settings have differing trial card behaviour.
      * @param GenerateCheckoutLinkRequestSchema_paymentMethodCollection|null $value Value to set for the paymentMethodCollection property.
     */
     public function setPaymentMethodCollection(?GenerateCheckoutLinkRequestSchema_paymentMethodCollection $value): void {

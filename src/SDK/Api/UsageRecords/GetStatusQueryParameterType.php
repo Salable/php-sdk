@@ -8,4 +8,5 @@ class GetStatusQueryParameterType extends Enum {
     public const RECORDED = "recorded";
     public const CURRENT = "current";
     public const FINAL = "final";
+    public const OVERAGE = "overage";
 }

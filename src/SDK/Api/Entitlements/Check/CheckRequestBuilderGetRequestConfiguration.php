@@ -29,7 +29,7 @@ class CheckRequestBuilderGetRequestConfiguration extends BaseRequestConfiguratio
     /**
      * Instantiates a new CheckRequestBuilderGetQueryParameters.
      * @param string|null $granteeId 
-     * @param string|null $owner 
+     * @param string|null $owner Owner value to scope the entitlement check to.
      * @return CheckRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $granteeId = null, ?string $owner = null): CheckRequestBuilderGetQueryParameters {

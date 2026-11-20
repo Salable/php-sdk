@@ -64,7 +64,7 @@ class CreateCartItemRequestSchema implements Parsable
         return  [
             'cartId' => fn(ParseNode $n) => $o->setCartId($n->getStringValue()),
             'grantee' => fn(ParseNode $n) => $o->setGrantee($n->getStringValue()),
-            'interval' => fn(ParseNode $n) => $o->setInterval($n->getEnumValue(CreateCartItemRequestSchema_interval::class)),
+            'interval' => fn(ParseNode $n) => $o->setInterval($n->getObjectValue([CreateCartItemRequestSchema_interval::class, 'createFromDiscriminatorValue'])),
             'intervalCount' => fn(ParseNode $n) => $o->setIntervalCount($n->getFloatValue()),
             'metadata' => fn(ParseNode $n) => $o->setMetadata($n->getObjectValue([CreateCartItemRequestSchemaMetadata2::class, 'createFromDiscriminatorValue'])),
             'planId' => fn(ParseNode $n) => $o->setPlanId($n->getStringValue()),
@@ -118,7 +118,7 @@ class CreateCartItemRequestSchema implements Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('cartId', $this->getCartId());
         $writer->writeStringValue('grantee', $this->getGrantee());
-        $writer->writeEnumValue('interval', $this->getInterval());
+        $writer->writeObjectValue('interval', $this->getInterval());
         $writer->writeFloatValue('intervalCount', $this->getIntervalCount());
         $writer->writeObjectValue('metadata', $this->getMetadata());
         $writer->writeStringValue('planId', $this->getPlanId());

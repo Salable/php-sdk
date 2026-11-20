@@ -19,7 +19,7 @@ class RecordUsageRequestSchema implements Parsable
     private ?string $meterSlug = null;
     
     /**
-     * @var string|null $owner The owner property
+     * @var string|null $owner Owner value to record usage for.
     */
     private ?string $owner = null;
     
@@ -62,7 +62,7 @@ class RecordUsageRequestSchema implements Parsable
     }
 
     /**
-     * Gets the owner property value. The owner property
+     * Gets the owner property value. Owner value to record usage for.
      * @return string|null
     */
     public function getOwner(): ?string {
@@ -96,7 +96,7 @@ class RecordUsageRequestSchema implements Parsable
     }
 
     /**
-     * Sets the owner property value. The owner property
+     * Sets the owner property value. Owner value to record usage for.
      * @param string|null $value Value to set for the owner property.
     */
     public function setOwner(?string $value): void {

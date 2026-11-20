@@ -50,6 +50,11 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
     private ?int $maxQuantity = null;
     
     /**
+     * @var LineItemsDataMeter|null $meter The meter property
+    */
+    private ?LineItemsDataMeter $meter = null;
+    
+    /**
      * @var string|null $meterId The meterId property
     */
     private ?string $meterId = null;
@@ -98,6 +103,21 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
      * @var string|null $stripeProductId The stripeProductId property
     */
     private ?string $stripeProductId = null;
+    
+    /**
+     * @var int|null $tokenExpiryDays The tokenExpiryDays property
+    */
+    private ?int $tokenExpiryDays = null;
+    
+    /**
+     * @var string|null $tokenId The tokenId property
+    */
+    private ?string $tokenId = null;
+    
+    /**
+     * @var int|null $tokenQuantity The tokenQuantity property
+    */
+    private ?int $tokenQuantity = null;
     
     /**
      * @var string|null $unitLabel The unitLabel property
@@ -171,6 +191,7 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
             'isActive' => fn(ParseNode $n) => $o->setIsActive($n->getBooleanValue()),
             'isUnlimited' => fn(ParseNode $n) => $o->setIsUnlimited($n->getBooleanValue()),
             'maxQuantity' => fn(ParseNode $n) => $o->setMaxQuantity($n->getIntegerValue()),
+            'meter' => fn(ParseNode $n) => $o->setMeter($n->getObjectValue([LineItemsDataMeter::class, 'createFromDiscriminatorValue'])),
             'meterId' => fn(ParseNode $n) => $o->setMeterId($n->getStringValue()),
             'minQuantity' => fn(ParseNode $n) => $o->setMinQuantity($n->getIntegerValue()),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
@@ -181,6 +202,9 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
             'priceType' => fn(ParseNode $n) => $o->setPriceType($n->getObjectValue([PlanLineItemsData_priceType::class, 'createFromDiscriminatorValue'])),
             'slug' => fn(ParseNode $n) => $o->setSlug($n->getStringValue()),
             'stripeProductId' => fn(ParseNode $n) => $o->setStripeProductId($n->getStringValue()),
+            'tokenExpiryDays' => fn(ParseNode $n) => $o->setTokenExpiryDays($n->getIntegerValue()),
+            'tokenId' => fn(ParseNode $n) => $o->setTokenId($n->getStringValue()),
+            'tokenQuantity' => fn(ParseNode $n) => $o->setTokenQuantity($n->getIntegerValue()),
             'unitLabel' => fn(ParseNode $n) => $o->setUnitLabel($n->getStringValue()),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
         ];
@@ -216,6 +240,14 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
     */
     public function getMaxQuantity(): ?int {
         return $this->maxQuantity;
+    }
+
+    /**
+     * Gets the meter property value. The meter property
+     * @return LineItemsDataMeter|null
+    */
+    public function getMeter(): ?LineItemsDataMeter {
+        return $this->meter;
     }
 
     /**
@@ -299,6 +331,30 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
     }
 
     /**
+     * Gets the tokenExpiryDays property value. The tokenExpiryDays property
+     * @return int|null
+    */
+    public function getTokenExpiryDays(): ?int {
+        return $this->tokenExpiryDays;
+    }
+
+    /**
+     * Gets the tokenId property value. The tokenId property
+     * @return string|null
+    */
+    public function getTokenId(): ?string {
+        return $this->tokenId;
+    }
+
+    /**
+     * Gets the tokenQuantity property value. The tokenQuantity property
+     * @return int|null
+    */
+    public function getTokenQuantity(): ?int {
+        return $this->tokenQuantity;
+    }
+
+    /**
      * Gets the unitLabel property value. The unitLabel property
      * @return string|null
     */
@@ -326,6 +382,7 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
         $writer->writeBooleanValue('isActive', $this->getIsActive());
         $writer->writeBooleanValue('isUnlimited', $this->getIsUnlimited());
         $writer->writeIntegerValue('maxQuantity', $this->getMaxQuantity());
+        $writer->writeObjectValue('meter', $this->getMeter());
         $writer->writeStringValue('meterId', $this->getMeterId());
         $writer->writeIntegerValue('minQuantity', $this->getMinQuantity());
         $writer->writeStringValue('name', $this->getName());
@@ -336,6 +393,9 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('priceType', $this->getPriceType());
         $writer->writeStringValue('slug', $this->getSlug());
         $writer->writeStringValue('stripeProductId', $this->getStripeProductId());
+        $writer->writeIntegerValue('tokenExpiryDays', $this->getTokenExpiryDays());
+        $writer->writeStringValue('tokenId', $this->getTokenId());
+        $writer->writeIntegerValue('tokenQuantity', $this->getTokenQuantity());
         $writer->writeStringValue('unitLabel', $this->getUnitLabel());
         $writer->writeStringValue('updatedAt', $this->getUpdatedAt());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -403,6 +463,14 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
     */
     public function setMaxQuantity(?int $value): void {
         $this->maxQuantity = $value;
+    }
+
+    /**
+     * Sets the meter property value. The meter property
+     * @param LineItemsDataMeter|null $value Value to set for the meter property.
+    */
+    public function setMeter(?LineItemsDataMeter $value): void {
+        $this->meter = $value;
     }
 
     /**
@@ -483,6 +551,30 @@ class PlanLineItemsData implements AdditionalDataHolder, Parsable
     */
     public function setStripeProductId(?string $value): void {
         $this->stripeProductId = $value;
+    }
+
+    /**
+     * Sets the tokenExpiryDays property value. The tokenExpiryDays property
+     * @param int|null $value Value to set for the tokenExpiryDays property.
+    */
+    public function setTokenExpiryDays(?int $value): void {
+        $this->tokenExpiryDays = $value;
+    }
+
+    /**
+     * Sets the tokenId property value. The tokenId property
+     * @param string|null $value Value to set for the tokenId property.
+    */
+    public function setTokenId(?string $value): void {
+        $this->tokenId = $value;
+    }
+
+    /**
+     * Sets the tokenQuantity property value. The tokenQuantity property
+     * @param int|null $value Value to set for the tokenQuantity property.
+    */
+    public function setTokenQuantity(?int $value): void {
+        $this->tokenQuantity = $value;
     }
 
     /**

@@ -28,11 +28,16 @@ class MembershipsRequestBuilderGetRequestConfiguration extends BaseRequestConfig
 
     /**
      * Instantiates a new MembershipsRequestBuilderGetQueryParameters.
+     * @param string|null $after 
+     * @param string|null $before 
      * @param array<GetExpandQueryParameterType>|null $expand 
+     * @param string|null $grantee Returns only memberships linked to this grantee ID.
+     * @param string|null $granteeId Deprecated: use `grantee` instead.
+     * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @return MembershipsRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?array $expand = null): MembershipsRequestBuilderGetQueryParameters {
-        return new MembershipsRequestBuilderGetQueryParameters($expand);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?array $expand = null, ?string $grantee = null, ?string $granteeId = null, ?int $limit = null): MembershipsRequestBuilderGetQueryParameters {
+        return new MembershipsRequestBuilderGetQueryParameters($after, $before, $expand, $grantee, $granteeId, $limit);
     }
 
 }

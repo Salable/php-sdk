@@ -36,7 +36,7 @@ class GroupsRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/groups{?after*,before*,expand,limit*,owner*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/groups{?after*,before*,expand,limit*,owner*,search*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

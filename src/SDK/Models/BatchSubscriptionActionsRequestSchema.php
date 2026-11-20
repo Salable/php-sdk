@@ -15,7 +15,7 @@ class BatchSubscriptionActionsRequestSchema implements Parsable
     private ?BatchSubscriptionActionsRequestSchema_action $action = null;
     
     /**
-     * @var array<string>|null $subscriptionIds The IDs of the subscriptions to apply the action to. Maximum of 100 IDs per request.
+     * @var array<string>|null $subscriptionIds The IDs of the subscriptions to apply the action to. Maximum of 500 IDs per request.
     */
     private ?array $subscriptionIds = null;
     
@@ -56,7 +56,7 @@ class BatchSubscriptionActionsRequestSchema implements Parsable
     }
 
     /**
-     * Gets the subscriptionIds property value. The IDs of the subscriptions to apply the action to. Maximum of 100 IDs per request.
+     * Gets the subscriptionIds property value. The IDs of the subscriptions to apply the action to. Maximum of 500 IDs per request.
      * @return array<string>|null
     */
     public function getSubscriptionIds(): ?array {
@@ -81,7 +81,7 @@ class BatchSubscriptionActionsRequestSchema implements Parsable
     }
 
     /**
-     * Sets the subscriptionIds property value. The IDs of the subscriptions to apply the action to. Maximum of 100 IDs per request.
+     * Sets the subscriptionIds property value. The IDs of the subscriptions to apply the action to. Maximum of 500 IDs per request.
      * @param array<string>|null $value Value to set for the subscriptionIds property.
     */
     public function setSubscriptionIds(?array $value): void {

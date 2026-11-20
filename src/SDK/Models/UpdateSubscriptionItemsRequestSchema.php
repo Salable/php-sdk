@@ -9,7 +9,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class UpdateSubscriptionItemsRequestSchema implements Parsable 
 {
     /**
-     * @var array<UpdateSubscriptionItemsRequestSchema_items>|null $items The list of plan changes to apply to the subscription.
+     * @var array<UpdateSubscriptionItemsRequestSchema_items>|null $items The list of plan changes to apply to the subscription. Maximum of 100 items per request.
     */
     private ?array $items = null;
     
@@ -40,7 +40,7 @@ class UpdateSubscriptionItemsRequestSchema implements Parsable
     }
 
     /**
-     * Gets the items property value. The list of plan changes to apply to the subscription.
+     * Gets the items property value. The list of plan changes to apply to the subscription. Maximum of 100 items per request.
      * @return array<UpdateSubscriptionItemsRequestSchema_items>|null
     */
     public function getItems(): ?array {
@@ -65,7 +65,7 @@ class UpdateSubscriptionItemsRequestSchema implements Parsable
     }
 
     /**
-     * Sets the items property value. The list of plan changes to apply to the subscription.
+     * Sets the items property value. The list of plan changes to apply to the subscription. Maximum of 100 items per request.
      * @param array<UpdateSubscriptionItemsRequestSchema_items>|null $value Value to set for the items property.
     */
     public function setItems(?array $value): void {

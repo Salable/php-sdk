@@ -2,20 +2,14 @@
 
 namespace Salable\SDK\Models;
 
-use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
-class RecordsList implements AdditionalDataHolder, Parsable 
+class GetReceiptItemListSchema implements Parsable 
 {
     /**
-     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
-    */
-    private ?array $additionalData = null;
-    
-    /**
-     * @var array<RecordsData>|null $data The data property
+     * @var array<GetReceiptItemListSchemaData>|null $data The data property
     */
     private ?array $data = null;
     
@@ -25,9 +19,14 @@ class RecordsList implements AdditionalDataHolder, Parsable
     private ?bool $hasMore = null;
     
     /**
-     * @var string|null $path The path property
+     * @var string|null $nextCursor The nextCursor property
     */
-    private ?string $path = null;
+    private ?string $nextCursor = null;
+    
+    /**
+     * @var string|null $previousCursor The previousCursor property
+    */
+    private ?string $previousCursor = null;
     
     /**
      * @var string|null $type The type property
@@ -35,32 +34,17 @@ class RecordsList implements AdditionalDataHolder, Parsable
     private ?string $type = null;
     
     /**
-     * Instantiates a new RecordsList and sets the default values.
-    */
-    public function __construct() {
-        $this->setAdditionalData([]);
-    }
-
-    /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return RecordsList
+     * @return GetReceiptItemListSchema
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): RecordsList {
-        return new RecordsList();
-    }
-
-    /**
-     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
-     * @return array<string, mixed>|null
-    */
-    public function getAdditionalData(): ?array {
-        return $this->additionalData;
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): GetReceiptItemListSchema {
+        return new GetReceiptItemListSchema();
     }
 
     /**
      * Gets the data property value. The data property
-     * @return array<RecordsData>|null
+     * @return array<GetReceiptItemListSchemaData>|null
     */
     public function getData(): ?array {
         return $this->data;
@@ -73,9 +57,10 @@ class RecordsList implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'data' => fn(ParseNode $n) => $o->setData($n->getCollectionOfObjectValues([RecordsData::class, 'createFromDiscriminatorValue'])),
+            'data' => fn(ParseNode $n) => $o->setData($n->getCollectionOfObjectValues([GetReceiptItemListSchemaData::class, 'createFromDiscriminatorValue'])),
             'hasMore' => fn(ParseNode $n) => $o->setHasMore($n->getBooleanValue()),
-            'path' => fn(ParseNode $n) => $o->setPath($n->getStringValue()),
+            'nextCursor' => fn(ParseNode $n) => $o->setNextCursor($n->getStringValue()),
+            'previousCursor' => fn(ParseNode $n) => $o->setPreviousCursor($n->getStringValue()),
             'type' => fn(ParseNode $n) => $o->setType($n->getStringValue()),
         ];
     }
@@ -89,11 +74,19 @@ class RecordsList implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the path property value. The path property
+     * Gets the nextCursor property value. The nextCursor property
      * @return string|null
     */
-    public function getPath(): ?string {
-        return $this->path;
+    public function getNextCursor(): ?string {
+        return $this->nextCursor;
+    }
+
+    /**
+     * Gets the previousCursor property value. The previousCursor property
+     * @return string|null
+    */
+    public function getPreviousCursor(): ?string {
+        return $this->previousCursor;
     }
 
     /**
@@ -111,22 +104,14 @@ class RecordsList implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('data', $this->getData());
         $writer->writeBooleanValue('hasMore', $this->getHasMore());
-        $writer->writeStringValue('path', $this->getPath());
+        $writer->writeStringValue('nextCursor', $this->getNextCursor());
+        $writer->writeStringValue('previousCursor', $this->getPreviousCursor());
         $writer->writeStringValue('type', $this->getType());
-        $writer->writeAdditionalData($this->getAdditionalData());
-    }
-
-    /**
-     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
-     * @param array<string,mixed> $value Value to set for the AdditionalData property.
-    */
-    public function setAdditionalData(?array $value): void {
-        $this->additionalData = $value;
     }
 
     /**
      * Sets the data property value. The data property
-     * @param array<RecordsData>|null $value Value to set for the data property.
+     * @param array<GetReceiptItemListSchemaData>|null $value Value to set for the data property.
     */
     public function setData(?array $value): void {
         $this->data = $value;
@@ -141,11 +126,19 @@ class RecordsList implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the path property value. The path property
-     * @param string|null $value Value to set for the path property.
+     * Sets the nextCursor property value. The nextCursor property
+     * @param string|null $value Value to set for the nextCursor property.
     */
-    public function setPath(?string $value): void {
-        $this->path = $value;
+    public function setNextCursor(?string $value): void {
+        $this->nextCursor = $value;
+    }
+
+    /**
+     * Sets the previousCursor property value. The previousCursor property
+     * @param string|null $value Value to set for the previousCursor property.
+    */
+    public function setPreviousCursor(?string $value): void {
+        $this->previousCursor = $value;
     }
 
     /**

@@ -31,7 +31,7 @@ class CheckRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * Unlock features in your product by checking what the grantee has access to.
+     * Unlock features in your product by checking what the grantee has access to. When an owner is provided, relevant meter and token slugs are included as typed entries.
      * @param CheckRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<CheckEntitlementsSchema|null>
      * @throws Exception
@@ -51,7 +51,7 @@ class CheckRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * Unlock features in your product by checking what the grantee has access to.
+     * Unlock features in your product by checking what the grantee has access to. When an owner is provided, relevant meter and token slugs are included as typed entries.
      * @param CheckRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

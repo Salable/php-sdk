@@ -9,7 +9,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class CreateGroupRequestSchema implements Parsable 
 {
     /**
-     * @var array<Grantees>|null $grantees Create new or connect existing grantees to the group. To connect an existing grantee use it's granteeId value.
+     * @var array<CreateGroupRequestSchemaGrantees>|null $grantees Create new or connect existing grantees to the group. To connect an existing grantee use it's granteeId value.
     */
     private ?array $grantees = null;
     
@@ -19,7 +19,7 @@ class CreateGroupRequestSchema implements Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $owner The owner property
+     * @var string|null $owner An owner is the tenant a subscription, cart, receipt, or usage record belongs to. Usually a team, organization, or workspace ID, or the user ID for single-user products.
     */
     private ?string $owner = null;
     
@@ -39,7 +39,7 @@ class CreateGroupRequestSchema implements Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'grantees' => fn(ParseNode $n) => $o->setGrantees($n->getCollectionOfObjectValues([Grantees::class, 'createFromDiscriminatorValue'])),
+            'grantees' => fn(ParseNode $n) => $o->setGrantees($n->getCollectionOfObjectValues([CreateGroupRequestSchemaGrantees::class, 'createFromDiscriminatorValue'])),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'owner' => fn(ParseNode $n) => $o->setOwner($n->getStringValue()),
         ];
@@ -47,7 +47,7 @@ class CreateGroupRequestSchema implements Parsable
 
     /**
      * Gets the grantees property value. Create new or connect existing grantees to the group. To connect an existing grantee use it's granteeId value.
-     * @return array<Grantees>|null
+     * @return array<CreateGroupRequestSchemaGrantees>|null
     */
     public function getGrantees(): ?array {
         return $this->grantees;
@@ -62,7 +62,7 @@ class CreateGroupRequestSchema implements Parsable
     }
 
     /**
-     * Gets the owner property value. The owner property
+     * Gets the owner property value. An owner is the tenant a subscription, cart, receipt, or usage record belongs to. Usually a team, organization, or workspace ID, or the user ID for single-user products.
      * @return string|null
     */
     public function getOwner(): ?string {
@@ -81,7 +81,7 @@ class CreateGroupRequestSchema implements Parsable
 
     /**
      * Sets the grantees property value. Create new or connect existing grantees to the group. To connect an existing grantee use it's granteeId value.
-     * @param array<Grantees>|null $value Value to set for the grantees property.
+     * @param array<CreateGroupRequestSchemaGrantees>|null $value Value to set for the grantees property.
     */
     public function setGrantees(?array $value): void {
         $this->grantees = $value;
@@ -96,7 +96,7 @@ class CreateGroupRequestSchema implements Parsable
     }
 
     /**
-     * Sets the owner property value. The owner property
+     * Sets the owner property value. An owner is the tenant a subscription, cart, receipt, or usage record belongs to. Usually a team, organization, or workspace ID, or the user ID for single-user products.
      * @param string|null $value Value to set for the owner property.
     */
     public function setOwner(?string $value): void {

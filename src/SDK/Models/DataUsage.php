@@ -45,9 +45,9 @@ class DataUsage implements AdditionalDataHolder, Parsable
     private ?string $ownerId = null;
     
     /**
-     * @var RecordsList|null $records The records property
+     * @var ApiSubscriptionPlansIdGetDataSubscriptionPlanLin|null $records The records property
     */
-    private ?RecordsList $records = null;
+    private ?ApiSubscriptionPlansIdGetDataSubscriptionPlanLin $records = null;
     
     /**
      * @var DataUsage_stripeSubscriptionItemId|null $stripeSubscriptionItemId The stripeSubscriptionItemId property
@@ -104,7 +104,7 @@ class DataUsage implements AdditionalDataHolder, Parsable
             'meterSlug' => fn(ParseNode $n) => $o->setMeterSlug($n->getStringValue()),
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
             'ownerId' => fn(ParseNode $n) => $o->setOwnerId($n->getStringValue()),
-            'records' => fn(ParseNode $n) => $o->setRecords($n->getObjectValue([RecordsList::class, 'createFromDiscriminatorValue'])),
+            'records' => fn(ParseNode $n) => $o->setRecords($n->getObjectValue([ApiSubscriptionPlansIdGetDataSubscriptionPlanLin::class, 'createFromDiscriminatorValue'])),
             'stripeSubscriptionItemId' => fn(ParseNode $n) => $o->setStripeSubscriptionItemId($n->getObjectValue([DataUsage_stripeSubscriptionItemId::class, 'createFromDiscriminatorValue'])),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
         ];
@@ -152,9 +152,9 @@ class DataUsage implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the records property value. The records property
-     * @return RecordsList|null
+     * @return ApiSubscriptionPlansIdGetDataSubscriptionPlanLin|null
     */
-    public function getRecords(): ?RecordsList {
+    public function getRecords(): ?ApiSubscriptionPlansIdGetDataSubscriptionPlanLin {
         return $this->records;
     }
 
@@ -249,9 +249,9 @@ class DataUsage implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the records property value. The records property
-     * @param RecordsList|null $value Value to set for the records property.
+     * @param ApiSubscriptionPlansIdGetDataSubscriptionPlanLin|null $value Value to set for the records property.
     */
-    public function setRecords(?RecordsList $value): void {
+    public function setRecords(?ApiSubscriptionPlansIdGetDataSubscriptionPlanLin $value): void {
         $this->records = $value;
     }
 

@@ -131,7 +131,7 @@ class UpdateLineItemRequestSchemaMetered implements Parsable
             'nickname' => fn(ParseNode $n) => $o->setNickname($n->getStringValue()),
             'priceType' => fn(ParseNode $n) => $o->setPriceType($n->getStringValue()),
             'slug' => fn(ParseNode $n) => $o->setSlug($n->getStringValue()),
-            'tiersMode' => fn(ParseNode $n) => $o->setTiersMode($n->getEnumValue(UpdateLineItemRequestSchemaMetered_tiersMode::class)),
+            'tiersMode' => fn(ParseNode $n) => $o->setTiersMode($n->getObjectValue([UpdateLineItemRequestSchemaMetered_tiersMode::class, 'createFromDiscriminatorValue'])),
             'unitLabel' => fn(ParseNode $n) => $o->setUnitLabel($n->getStringValue()),
         ];
     }
@@ -249,7 +249,7 @@ class UpdateLineItemRequestSchemaMetered implements Parsable
         $writer->writeStringValue('nickname', $this->getNickname());
         $writer->writeStringValue('priceType', $this->getPriceType());
         $writer->writeStringValue('slug', $this->getSlug());
-        $writer->writeEnumValue('tiersMode', $this->getTiersMode());
+        $writer->writeObjectValue('tiersMode', $this->getTiersMode());
         $writer->writeStringValue('unitLabel', $this->getUnitLabel());
     }
 

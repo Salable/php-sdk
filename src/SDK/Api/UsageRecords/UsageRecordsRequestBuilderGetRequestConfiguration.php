@@ -32,7 +32,7 @@ class UsageRecordsRequestBuilderGetRequestConfiguration extends BaseRequestConfi
      * @param string|null $before 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @param string|null $meterSlug 
-     * @param string|null $owner 
+     * @param string|null $owner Owner ID or value to filter usage records by.
      * @param GetSortQueryParameterType|null $sort 
      * @param array<GetStatusQueryParameterType>|null $status 
      * @return UsageRecordsRequestBuilderGetQueryParameters

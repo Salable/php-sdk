@@ -30,12 +30,13 @@ class EventAttemptsRequestBuilderGetRequestConfiguration extends BaseRequestConf
      * Instantiates a new EventAttemptsRequestBuilderGetQueryParameters.
      * @param string|null $after 
      * @param string|null $before 
-     * @param string|null $destinationId 
+     * @param string|null $destination Filter by destination ID.
+     * @param string|null $destinationId Deprecated: use `destination` instead.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @return EventAttemptsRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $destinationId = null, ?int $limit = null): EventAttemptsRequestBuilderGetQueryParameters {
-        return new EventAttemptsRequestBuilderGetQueryParameters($after, $before, $destinationId, $limit);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $destination = null, ?string $destinationId = null, ?int $limit = null): EventAttemptsRequestBuilderGetQueryParameters {
+        return new EventAttemptsRequestBuilderGetQueryParameters($after, $before, $destination, $destinationId, $limit);
     }
 
 }

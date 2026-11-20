@@ -10,12 +10,12 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class ApiSubscriptionsPost implements Parsable 
 {
     /**
-     * @var bool|null $cancelAtPeriodEnd When `true`, the subscription will be cancelled at the end of the current billing period rather than renewing.
+     * @var bool|null $cancelAtPeriodEnd When `true`, the subscription will be cancelled at the end of the current billing period rather than renewing. Required and must be `true` when `expiryDate` is provided without an `interval`.
     */
     private ?bool $cancelAtPeriodEnd = null;
     
     /**
-     * @var DateTime|null $expiryDate A fixed date on which the subscription expires. Cannot be used together with `isPerpetual`.
+     * @var DateTime|null $expiryDate A future ISO 8601 date-time with a timezone offset or `Z`. The value is stored and compared in UTC. When `interval` is omitted, `cancelAtPeriodEnd` must be `true`. Cannot be used together with `isPerpetual`.
     */
     private ?DateTime $expiryDate = null;
     
@@ -59,7 +59,7 @@ class ApiSubscriptionsPost implements Parsable
     }
 
     /**
-     * Gets the cancelAtPeriodEnd property value. When `true`, the subscription will be cancelled at the end of the current billing period rather than renewing.
+     * Gets the cancelAtPeriodEnd property value. When `true`, the subscription will be cancelled at the end of the current billing period rather than renewing. Required and must be `true` when `expiryDate` is provided without an `interval`.
      * @return bool|null
     */
     public function getCancelAtPeriodEnd(): ?bool {
@@ -67,7 +67,7 @@ class ApiSubscriptionsPost implements Parsable
     }
 
     /**
-     * Gets the expiryDate property value. A fixed date on which the subscription expires. Cannot be used together with `isPerpetual`.
+     * Gets the expiryDate property value. A future ISO 8601 date-time with a timezone offset or `Z`. The value is stored and compared in UTC. When `interval` is omitted, `cancelAtPeriodEnd` must be `true`. Cannot be used together with `isPerpetual`.
      * @return DateTime|null
     */
     public function getExpiryDate(): ?DateTime {
@@ -156,7 +156,7 @@ class ApiSubscriptionsPost implements Parsable
     }
 
     /**
-     * Sets the cancelAtPeriodEnd property value. When `true`, the subscription will be cancelled at the end of the current billing period rather than renewing.
+     * Sets the cancelAtPeriodEnd property value. When `true`, the subscription will be cancelled at the end of the current billing period rather than renewing. Required and must be `true` when `expiryDate` is provided without an `interval`.
      * @param bool|null $value Value to set for the cancelAtPeriodEnd property.
     */
     public function setCancelAtPeriodEnd(?bool $value): void {
@@ -164,7 +164,7 @@ class ApiSubscriptionsPost implements Parsable
     }
 
     /**
-     * Sets the expiryDate property value. A fixed date on which the subscription expires. Cannot be used together with `isPerpetual`.
+     * Sets the expiryDate property value. A future ISO 8601 date-time with a timezone offset or `Z`. The value is stored and compared in UTC. When `interval` is omitted, `cancelAtPeriodEnd` must be `true`. Cannot be used together with `isPerpetual`.
      * @param DateTime|null $value Value to set for the expiryDate property.
     */
     public function setExpiryDate(?DateTime $value): void {

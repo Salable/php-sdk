@@ -38,12 +38,13 @@ class PlansRequestBuilderGetRequestConfiguration extends BaseRequestConfiguratio
      * @param string|null $intervalCount 
      * @param string|null $isActive 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param array<string>|null $productId Accepts a comma-separated list of product IDs. Returns plans belonging to any of the specified product IDs.
+     * @param array<string>|null $product Accepts a comma-separated list of product IDs. Returns plans belonging to any of the specified product IDs.
+     * @param array<string>|null $productId Deprecated: use `product` instead.
      * @param string|null $search 
      * @return PlansRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?GetCurrencyQueryParameterType $currency = null, ?array $expand = null, ?bool $includeArchived = null, ?GetIncludeFilterOptionsQueryParameterType $includeFilterOptions = null, ?GetIntervalQueryParameterType $interval = null, ?string $intervalCount = null, ?string $isActive = null, ?int $limit = null, ?array $productId = null, ?string $search = null): PlansRequestBuilderGetQueryParameters {
-        return new PlansRequestBuilderGetQueryParameters($after, $before, $currency, $expand, $includeArchived, $includeFilterOptions, $interval, $intervalCount, $isActive, $limit, $productId, $search);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?GetCurrencyQueryParameterType $currency = null, ?array $expand = null, ?bool $includeArchived = null, ?GetIncludeFilterOptionsQueryParameterType $includeFilterOptions = null, ?GetIntervalQueryParameterType $interval = null, ?string $intervalCount = null, ?string $isActive = null, ?int $limit = null, ?array $product = null, ?array $productId = null, ?string $search = null): PlansRequestBuilderGetQueryParameters {
+        return new PlansRequestBuilderGetQueryParameters($after, $before, $currency, $expand, $includeArchived, $includeFilterOptions, $interval, $intervalCount, $isActive, $limit, $product, $productId, $search);
     }
 
 }

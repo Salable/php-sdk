@@ -30,13 +30,16 @@ class GranteesRequestBuilderGetRequestConfiguration extends BaseRequestConfigura
      * Instantiates a new GranteesRequestBuilderGetQueryParameters.
      * @param string|null $after 
      * @param string|null $before 
-     * @param string|null $groupId Returns only grantees belonging to this group ID.
+     * @param string|null $entitlement Returns grantees who have access to this entitlement.
+     * @param string|null $group Returns only grantees belonging to this group ID.
+     * @param string|null $groupId Deprecated: use `group` instead.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
+     * @param string|null $owner Returns only grantees with a membership belonging to this owner ID or value.
      * @param string|null $search 
      * @return GranteesRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $groupId = null, ?int $limit = null, ?string $search = null): GranteesRequestBuilderGetQueryParameters {
-        return new GranteesRequestBuilderGetQueryParameters($after, $before, $groupId, $limit, $search);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?string $entitlement = null, ?string $group = null, ?string $groupId = null, ?int $limit = null, ?string $owner = null, ?string $search = null): GranteesRequestBuilderGetQueryParameters {
+        return new GranteesRequestBuilderGetQueryParameters($after, $before, $entitlement, $group, $groupId, $limit, $owner, $search);
     }
 
 }

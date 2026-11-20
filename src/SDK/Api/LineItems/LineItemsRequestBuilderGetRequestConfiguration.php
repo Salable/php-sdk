@@ -31,12 +31,13 @@ class LineItemsRequestBuilderGetRequestConfiguration extends BaseRequestConfigur
      * @param string|null $after 
      * @param string|null $before 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param string|null $planId Returns only line items linked to this plan ID.
+     * @param string|null $plan Returns only line items linked to this plan ID.
+     * @param string|null $planId Deprecated: use `plan` instead.
      * @param string|null $search 
      * @return LineItemsRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?int $limit = null, ?string $planId = null, ?string $search = null): LineItemsRequestBuilderGetQueryParameters {
-        return new LineItemsRequestBuilderGetQueryParameters($after, $before, $limit, $planId, $search);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?int $limit = null, ?string $plan = null, ?string $planId = null, ?string $search = null): LineItemsRequestBuilderGetQueryParameters {
+        return new LineItemsRequestBuilderGetQueryParameters($after, $before, $limit, $plan, $planId, $search);
     }
 
 }

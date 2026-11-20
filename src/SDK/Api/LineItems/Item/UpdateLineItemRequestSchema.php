@@ -10,9 +10,10 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Salable\SDK\Models\UpdateLineItemRequestSchemaFlatRate;
 use Salable\SDK\Models\UpdateLineItemRequestSchemaMetered;
 use Salable\SDK\Models\UpdateLineItemRequestSchemaPerSeat;
+use Salable\SDK\Models\UpdateLineItemRequestSchemaToken;
 
 /**
- * Composed type wrapper for classes UpdateLineItemRequestSchemaFlatRate, UpdateLineItemRequestSchemaMetered, UpdateLineItemRequestSchemaPerSeat
+ * Composed type wrapper for classes UpdateLineItemRequestSchemaFlatRate, UpdateLineItemRequestSchemaMetered, UpdateLineItemRequestSchemaPerSeat, UpdateLineItemRequestSchemaToken
 */
 class UpdateLineItemRequestSchema implements ComposedTypeWrapper, Parsable 
 {
@@ -32,6 +33,11 @@ class UpdateLineItemRequestSchema implements ComposedTypeWrapper, Parsable
     private ?UpdateLineItemRequestSchemaPerSeat $updateLineItemRequestSchemaPerSeat = null;
     
     /**
+     * @var UpdateLineItemRequestSchemaToken|null $updateLineItemRequestSchemaToken Composed type representation for type UpdateLineItemRequestSchemaToken
+    */
+    private ?UpdateLineItemRequestSchemaToken $updateLineItemRequestSchemaToken = null;
+    
+    /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
      * @return UpdateLineItemRequestSchema
@@ -41,6 +47,7 @@ class UpdateLineItemRequestSchema implements ComposedTypeWrapper, Parsable
         $result->setUpdateLineItemRequestSchemaFlatRate(new UpdateLineItemRequestSchemaFlatRate());
         $result->setUpdateLineItemRequestSchemaMetered(new UpdateLineItemRequestSchemaMetered());
         $result->setUpdateLineItemRequestSchemaPerSeat(new UpdateLineItemRequestSchemaPerSeat());
+        $result->setUpdateLineItemRequestSchemaToken(new UpdateLineItemRequestSchemaToken());
         return $result;
     }
 
@@ -49,8 +56,8 @@ class UpdateLineItemRequestSchema implements ComposedTypeWrapper, Parsable
      * @return array<string, callable(ParseNode): void>
     */
     public function getFieldDeserializers(): array {
-        if ($this->getUpdateLineItemRequestSchemaFlatRate() !== null || $this->getUpdateLineItemRequestSchemaMetered() !== null || $this->getUpdateLineItemRequestSchemaPerSeat() !== null) {
-            return ParseNodeHelper::mergeDeserializersForIntersectionWrapper($this->getUpdateLineItemRequestSchemaFlatRate(), $this->getUpdateLineItemRequestSchemaMetered(), $this->getUpdateLineItemRequestSchemaPerSeat());
+        if ($this->getUpdateLineItemRequestSchemaFlatRate() !== null || $this->getUpdateLineItemRequestSchemaMetered() !== null || $this->getUpdateLineItemRequestSchemaPerSeat() !== null || $this->getUpdateLineItemRequestSchemaToken() !== null) {
+            return ParseNodeHelper::mergeDeserializersForIntersectionWrapper($this->getUpdateLineItemRequestSchemaFlatRate(), $this->getUpdateLineItemRequestSchemaMetered(), $this->getUpdateLineItemRequestSchemaPerSeat(), $this->getUpdateLineItemRequestSchemaToken());
         }
         return [];
     }
@@ -80,11 +87,19 @@ class UpdateLineItemRequestSchema implements ComposedTypeWrapper, Parsable
     }
 
     /**
+     * Gets the UpdateLineItemRequestSchemaToken property value. Composed type representation for type UpdateLineItemRequestSchemaToken
+     * @return UpdateLineItemRequestSchemaToken|null
+    */
+    public function getUpdateLineItemRequestSchemaToken(): ?UpdateLineItemRequestSchemaToken {
+        return $this->updateLineItemRequestSchemaToken;
+    }
+
+    /**
      * Serializes information the current object
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeObjectValue(null, $this->getUpdateLineItemRequestSchemaFlatRate(), $this->getUpdateLineItemRequestSchemaMetered(), $this->getUpdateLineItemRequestSchemaPerSeat());
+        $writer->writeObjectValue(null, $this->getUpdateLineItemRequestSchemaFlatRate(), $this->getUpdateLineItemRequestSchemaMetered(), $this->getUpdateLineItemRequestSchemaPerSeat(), $this->getUpdateLineItemRequestSchemaToken());
     }
 
     /**
@@ -109,6 +124,14 @@ class UpdateLineItemRequestSchema implements ComposedTypeWrapper, Parsable
     */
     public function setUpdateLineItemRequestSchemaPerSeat(?UpdateLineItemRequestSchemaPerSeat $value): void {
         $this->updateLineItemRequestSchemaPerSeat = $value;
+    }
+
+    /**
+     * Sets the UpdateLineItemRequestSchemaToken property value. Composed type representation for type UpdateLineItemRequestSchemaToken
+     * @param UpdateLineItemRequestSchemaToken|null $value Value to set for the UpdateLineItemRequestSchemaToken property.
+    */
+    public function setUpdateLineItemRequestSchemaToken(?UpdateLineItemRequestSchemaToken $value): void {
+        $this->updateLineItemRequestSchemaToken = $value;
     }
 
 }

@@ -22,7 +22,7 @@ class MessagesRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/ai/messages{?after*,before*,conversationId*,limit*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/ai/messages{?after*,before*,conversation*,conversationId*,limit*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

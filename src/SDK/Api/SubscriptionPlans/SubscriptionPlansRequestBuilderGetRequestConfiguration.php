@@ -32,7 +32,7 @@ class SubscriptionPlansRequestBuilderGetRequestConfiguration extends BaseRequest
      * @param string|null $before Return records before this cursor for backwards pagination. Use the `previousCursor` from a previous response.
      * @param array<GetExpandQueryParameterType>|null $expand Expand related resources inline. Accepts a comma-separated list. Supported values: `subscriptionPlanLineItems`, `plan`.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param string|null $owner Returns only subscription plans belonging to this owner.
+     * @param string|null $owner Returns only subscription plans belonging to this owner ID or value.
      * @param array<string>|null $plans Accepts a comma-separated list of plan IDs. Returns subscription plans linked to any of the specified plan IDs.
      * @param GetStatusQueryParameterType|null $status Defaults to `active`.
      * @return SubscriptionPlansRequestBuilderGetQueryParameters

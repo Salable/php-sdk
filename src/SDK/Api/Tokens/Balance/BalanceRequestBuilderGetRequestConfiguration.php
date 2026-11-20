@@ -28,7 +28,7 @@ class BalanceRequestBuilderGetRequestConfiguration extends BaseRequestConfigurat
 
     /**
      * Instantiates a new BalanceRequestBuilderGetQueryParameters.
-     * @param string|null $owner Owner value to retrieve the active token balances for.
+     * @param string|null $owner Owner value to retrieve the token balances for.
      * @param string|null $source Receipt item or Subscription plan line item ID to retrieve the token balance for.
      * @param string|null $token Token slug to retrieve the balance for. If omitted all tokens will be returned for the specified owner.
      * @return BalanceRequestBuilderGetQueryParameters

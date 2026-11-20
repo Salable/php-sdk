@@ -14,6 +14,7 @@ use Salable\SDK\Api\Destinations\DestinationsRequestBuilder;
 use Salable\SDK\Api\Entitlements\EntitlementsRequestBuilder;
 use Salable\SDK\Api\EventAttempts\EventAttemptsRequestBuilder;
 use Salable\SDK\Api\Events\EventsRequestBuilder;
+use Salable\SDK\Api\EventTypes\EventTypesRequestBuilder;
 use Salable\SDK\Api\Grantees\GranteesRequestBuilder;
 use Salable\SDK\Api\Groups\GroupsRequestBuilder;
 use Salable\SDK\Api\LineItems\LineItemsRequestBuilder;
@@ -24,6 +25,7 @@ use Salable\SDK\Api\PaymentIntegrations\PaymentIntegrationsRequestBuilder;
 use Salable\SDK\Api\Plans\PlansRequestBuilder;
 use Salable\SDK\Api\Prices\PricesRequestBuilder;
 use Salable\SDK\Api\Products\ProductsRequestBuilder;
+use Salable\SDK\Api\ReceiptItems\ReceiptItemsRequestBuilder;
 use Salable\SDK\Api\Receipts\ReceiptsRequestBuilder;
 use Salable\SDK\Api\SigningKeys\SigningKeysRequestBuilder;
 use Salable\SDK\Api\Stripe\StripeRequestBuilder;
@@ -113,6 +115,13 @@ class ApiRequestBuilder extends BaseRequestBuilder
     }
     
     /**
+     * The eventTypes property
+    */
+    public function eventTypes(): EventTypesRequestBuilder {
+        return new EventTypesRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
      * The grantees property
     */
     public function grantees(): GranteesRequestBuilder {
@@ -180,6 +189,13 @@ class ApiRequestBuilder extends BaseRequestBuilder
     */
     public function products(): ProductsRequestBuilder {
         return new ProductsRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * The receiptItems property
+    */
+    public function receiptItems(): ReceiptItemsRequestBuilder {
+        return new ReceiptItemsRequestBuilder($this->pathParameters, $this->requestAdapter);
     }
     
     /**

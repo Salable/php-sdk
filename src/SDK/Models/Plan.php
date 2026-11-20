@@ -65,6 +65,11 @@ class Plan implements AdditionalDataHolder, Parsable
     private ?string $productId = null;
     
     /**
+     * @var PlanTierTag|null $tierTag The tierTag property
+    */
+    private ?PlanTierTag $tierTag = null;
+    
+    /**
      * @var string|null $tierTagId The tierTagId property
     */
     private ?string $tierTagId = null;
@@ -136,6 +141,7 @@ class Plan implements AdditionalDataHolder, Parsable
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
             'product' => fn(ParseNode $n) => $o->setProduct($n->getObjectValue([ProductObject::class, 'createFromDiscriminatorValue'])),
             'productId' => fn(ParseNode $n) => $o->setProductId($n->getStringValue()),
+            'tierTag' => fn(ParseNode $n) => $o->setTierTag($n->getObjectValue([PlanTierTag::class, 'createFromDiscriminatorValue'])),
             'tierTagId' => fn(ParseNode $n) => $o->setTierTagId($n->getStringValue()),
             'trialPeriodDays' => fn(ParseNode $n) => $o->setTrialPeriodDays($n->getIntegerValue()),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
@@ -207,6 +213,14 @@ class Plan implements AdditionalDataHolder, Parsable
     }
 
     /**
+     * Gets the tierTag property value. The tierTag property
+     * @return PlanTierTag|null
+    */
+    public function getTierTag(): ?PlanTierTag {
+        return $this->tierTag;
+    }
+
+    /**
      * Gets the tierTagId property value. The tierTagId property
      * @return string|null
     */
@@ -245,6 +259,7 @@ class Plan implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('organisation', $this->getOrganisation());
         $writer->writeObjectValue('product', $this->getProduct());
         $writer->writeStringValue('productId', $this->getProductId());
+        $writer->writeObjectValue('tierTag', $this->getTierTag());
         $writer->writeStringValue('tierTagId', $this->getTierTagId());
         $writer->writeIntegerValue('trialPeriodDays', $this->getTrialPeriodDays());
         $writer->writeStringValue('updatedAt', $this->getUpdatedAt());
@@ -337,6 +352,14 @@ class Plan implements AdditionalDataHolder, Parsable
     */
     public function setProductId(?string $value): void {
         $this->productId = $value;
+    }
+
+    /**
+     * Sets the tierTag property value. The tierTag property
+     * @param PlanTierTag|null $value Value to set for the tierTag property.
+    */
+    public function setTierTag(?PlanTierTag $value): void {
+        $this->tierTag = $value;
     }
 
     /**

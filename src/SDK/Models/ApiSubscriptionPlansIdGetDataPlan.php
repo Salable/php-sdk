@@ -25,9 +25,9 @@ class ApiSubscriptionPlansIdGetDataPlan implements AdditionalDataHolder, Parsabl
     private ?string $createdAt = null;
     
     /**
-     * @var GetSubscriptionPlanDetailSchemaDataPlanEntitleme|null $entitlements The entitlements property
+     * @var ApiSubscriptionPlansIdGetDataPlanEntitlementsLis|null $entitlements The entitlements property
     */
-    private ?GetSubscriptionPlanDetailSchemaDataPlanEntitleme $entitlements = null;
+    private ?ApiSubscriptionPlansIdGetDataPlanEntitlementsLis $entitlements = null;
     
     /**
      * @var string|null $id The id property
@@ -116,9 +116,9 @@ class ApiSubscriptionPlansIdGetDataPlan implements AdditionalDataHolder, Parsabl
 
     /**
      * Gets the entitlements property value. The entitlements property
-     * @return GetSubscriptionPlanDetailSchemaDataPlanEntitleme|null
+     * @return ApiSubscriptionPlansIdGetDataPlanEntitlementsLis|null
     */
-    public function getEntitlements(): ?GetSubscriptionPlanDetailSchemaDataPlanEntitleme {
+    public function getEntitlements(): ?ApiSubscriptionPlansIdGetDataPlanEntitlementsLis {
         return $this->entitlements;
     }
 
@@ -131,7 +131,7 @@ class ApiSubscriptionPlansIdGetDataPlan implements AdditionalDataHolder, Parsabl
         return  [
             'archivedAt' => fn(ParseNode $n) => $o->setArchivedAt($n->getObjectValue([ApiSubscriptionPlansIdGetDataPlan_archivedAt::class, 'createFromDiscriminatorValue'])),
             'createdAt' => fn(ParseNode $n) => $o->setCreatedAt($n->getStringValue()),
-            'entitlements' => fn(ParseNode $n) => $o->setEntitlements($n->getObjectValue([GetSubscriptionPlanDetailSchemaDataPlanEntitleme::class, 'createFromDiscriminatorValue'])),
+            'entitlements' => fn(ParseNode $n) => $o->setEntitlements($n->getObjectValue([ApiSubscriptionPlansIdGetDataPlanEntitlementsLis::class, 'createFromDiscriminatorValue'])),
             'id' => fn(ParseNode $n) => $o->setId($n->getStringValue()),
             'isActive' => fn(ParseNode $n) => $o->setIsActive($n->getBooleanValue()),
             'isPerpetual' => fn(ParseNode $n) => $o->setIsPerpetual($n->getBooleanValue()),
@@ -262,9 +262,9 @@ class ApiSubscriptionPlansIdGetDataPlan implements AdditionalDataHolder, Parsabl
 
     /**
      * Sets the entitlements property value. The entitlements property
-     * @param GetSubscriptionPlanDetailSchemaDataPlanEntitleme|null $value Value to set for the entitlements property.
+     * @param ApiSubscriptionPlansIdGetDataPlanEntitlementsLis|null $value Value to set for the entitlements property.
     */
-    public function setEntitlements(?GetSubscriptionPlanDetailSchemaDataPlanEntitleme $value): void {
+    public function setEntitlements(?ApiSubscriptionPlansIdGetDataPlanEntitlementsLis $value): void {
         $this->entitlements = $value;
     }
 

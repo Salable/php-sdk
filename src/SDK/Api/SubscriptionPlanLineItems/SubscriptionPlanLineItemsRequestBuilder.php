@@ -2,9 +2,15 @@
 
 namespace Salable\SDK\Api\SubscriptionPlanLineItems;
 
+use Exception;
+use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
+use Microsoft\Kiota\Abstractions\HttpMethod;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
+use Microsoft\Kiota\Abstractions\RequestInformation;
 use Salable\SDK\Api\SubscriptionPlanLineItems\Item\SubscriptionPlanLineItemsItemRequestBuilder;
+use Salable\SDK\Models\ErrorResponseBody;
+use Salable\SDK\Models\GetSubscriptionPlanLineItemListSchema;
 
 /**
  * Builds and executes requests for operations under /api/subscription-plan-line-items
@@ -28,12 +34,62 @@ class SubscriptionPlanLineItemsRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/subscription-plan-line-items');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/subscription-plan-line-items{?after*,before*,limit*,subscriptionPlans}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
             $this->pathParameters = ['request-raw-url' => $pathParametersOrRawUrl];
         }
+    }
+
+    /**
+     * Returns a list of subscription plan line items sorted by creation date, with the most recently created appearing first.
+     * @param SubscriptionPlanLineItemsRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
+     * @return Promise<GetSubscriptionPlanLineItemListSchema|null>
+     * @throws Exception
+    */
+    public function get(?SubscriptionPlanLineItemsRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
+        $requestInfo = $this->toGetRequestInformation($requestConfiguration);
+        $errorMappings = [
+                '400' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '401' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '403' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '405' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '429' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetSubscriptionPlanLineItemListSchema::class, 'createFromDiscriminatorValue'], $errorMappings);
+    }
+
+    /**
+     * Returns a list of subscription plan line items sorted by creation date, with the most recently created appearing first.
+     * @param SubscriptionPlanLineItemsRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
+     * @return RequestInformation
+    */
+    public function toGetRequestInformation(?SubscriptionPlanLineItemsRequestBuilderGetRequestConfiguration $requestConfiguration = null): RequestInformation {
+        $requestInfo = new RequestInformation();
+        $requestInfo->urlTemplate = $this->urlTemplate;
+        $requestInfo->pathParameters = $this->pathParameters;
+        $requestInfo->httpMethod = HttpMethod::GET;
+        if ($requestConfiguration !== null) {
+            $requestInfo->addHeaders($requestConfiguration->headers);
+            if ($requestConfiguration->queryParameters !== null) {
+                $requestInfo->setQueryParameters($requestConfiguration->queryParameters);
+            }
+            $requestInfo->addRequestOptions(...$requestConfiguration->options);
+        }
+        $requestInfo->tryAddHeader('Accept', "application/json");
+        return $requestInfo;
+    }
+
+    /**
+     * Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
+     * @param string $rawUrl The raw URL to use for the request builder.
+     * @return SubscriptionPlanLineItemsRequestBuilder
+    */
+    public function withUrl(string $rawUrl): SubscriptionPlanLineItemsRequestBuilder {
+        return new SubscriptionPlanLineItemsRequestBuilder($rawUrl, $this->requestAdapter);
     }
 
 }

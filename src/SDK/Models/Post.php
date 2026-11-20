@@ -79,7 +79,7 @@ class Post implements Parsable
     private ?string $owner = null;
     
     /**
-     * @var Post_paymentMethodCollection|null $paymentMethodCollection Controls whether Stripe always collects a payment method for subscription Checkout or only collects one when payment is due. If any plans contain one-off line items, the payment method collection will fallback to `always`. Defaults to `always`.
+     * @var Post_paymentMethodCollection|null $paymentMethodCollection Whether a card is required at checkout. Applies only when trial days are set on the plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless but cannot be used if any one-off line items are included on the plan. Defaults to the plan's product settings trial card behaviour.
     */
     private ?Post_paymentMethodCollection $paymentMethodCollection = null;
     
@@ -196,7 +196,7 @@ class Post implements Parsable
             'discounts' => fn(ParseNode $n) => $o->setDiscounts($n->getCollectionOfObjectValues([PostDiscounts::class, 'createFromDiscriminatorValue'])),
             'email' => fn(ParseNode $n) => $o->setEmail($n->getStringValue()),
             'grantee' => fn(ParseNode $n) => $o->setGrantee($n->getStringValue()),
-            'interval' => fn(ParseNode $n) => $o->setInterval($n->getEnumValue(Post_interval::class)),
+            'interval' => fn(ParseNode $n) => $o->setInterval($n->getObjectValue([Post_interval::class, 'createFromDiscriminatorValue'])),
             'intervalCount' => fn(ParseNode $n) => $o->setIntervalCount($n->getFloatValue()),
             'metadata' => fn(ParseNode $n) => $o->setMetadata($n->getObjectValue([ApiCheckoutPostMetadata::class, 'createFromDiscriminatorValue'])),
             'owner' => fn(ParseNode $n) => $o->setOwner($n->getStringValue()),
@@ -248,7 +248,7 @@ class Post implements Parsable
     }
 
     /**
-     * Gets the paymentMethodCollection property value. Controls whether Stripe always collects a payment method for subscription Checkout or only collects one when payment is due. If any plans contain one-off line items, the payment method collection will fallback to `always`. Defaults to `always`.
+     * Gets the paymentMethodCollection property value. Whether a card is required at checkout. Applies only when trial days are set on the plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless but cannot be used if any one-off line items are included on the plan. Defaults to the plan's product settings trial card behaviour.
      * @return Post_paymentMethodCollection|null
     */
     public function getPaymentMethodCollection(): ?Post_paymentMethodCollection {
@@ -294,7 +294,7 @@ class Post implements Parsable
         $writer->writeCollectionOfObjectValues('discounts', $this->getDiscounts());
         $writer->writeStringValue('email', $this->getEmail());
         $writer->writeStringValue('grantee', $this->getGrantee());
-        $writer->writeEnumValue('interval', $this->getInterval());
+        $writer->writeObjectValue('interval', $this->getInterval());
         $writer->writeFloatValue('intervalCount', $this->getIntervalCount());
         $writer->writeObjectValue('metadata', $this->getMetadata());
         $writer->writeStringValue('owner', $this->getOwner());
@@ -417,7 +417,7 @@ class Post implements Parsable
     }
 
     /**
-     * Sets the paymentMethodCollection property value. Controls whether Stripe always collects a payment method for subscription Checkout or only collects one when payment is due. If any plans contain one-off line items, the payment method collection will fallback to `always`. Defaults to `always`.
+     * Sets the paymentMethodCollection property value. Whether a card is required at checkout. Applies only when trial days are set on the plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless but cannot be used if any one-off line items are included on the plan. Defaults to the plan's product settings trial card behaviour.
      * @param Post_paymentMethodCollection|null $value Value to set for the paymentMethodCollection property.
     */
     public function setPaymentMethodCollection(?Post_paymentMethodCollection $value): void {

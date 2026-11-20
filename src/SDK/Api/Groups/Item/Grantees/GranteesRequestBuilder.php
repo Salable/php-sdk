@@ -39,7 +39,6 @@ class GranteesRequestBuilder extends BaseRequestBuilder
     public function post(array $body, ?GranteesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
         $errorMappings = [
-                '400' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
                 '401' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
                 '403' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
                 '404' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],

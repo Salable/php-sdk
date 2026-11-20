@@ -64,6 +64,11 @@ class Settings implements Parsable
     private ?string $successUrl = null;
     
     /**
+     * @var Settings_trialCardBehaviour|null $trialCardBehaviour The trialCardBehaviour property
+    */
+    private ?Settings_trialCardBehaviour $trialCardBehaviour = null;
+    
+    /**
      * @var string|null $updatedAt The updatedAt property
     */
     private ?string $updatedAt = null;
@@ -143,6 +148,7 @@ class Settings implements Parsable
             'pastDueEntitlements' => fn(ParseNode $n) => $o->setPastDueEntitlements($n->getBooleanValue()),
             'productId' => fn(ParseNode $n) => $o->setProductId($n->getStringValue()),
             'successUrl' => fn(ParseNode $n) => $o->setSuccessUrl($n->getStringValue()),
+            'trialCardBehaviour' => fn(ParseNode $n) => $o->setTrialCardBehaviour($n->getObjectValue([Settings_trialCardBehaviour::class, 'createFromDiscriminatorValue'])),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
         ];
     }
@@ -188,6 +194,14 @@ class Settings implements Parsable
     }
 
     /**
+     * Gets the trialCardBehaviour property value. The trialCardBehaviour property
+     * @return Settings_trialCardBehaviour|null
+    */
+    public function getTrialCardBehaviour(): ?Settings_trialCardBehaviour {
+        return $this->trialCardBehaviour;
+    }
+
+    /**
      * Gets the updatedAt property value. The updatedAt property
      * @return string|null
     */
@@ -211,6 +225,7 @@ class Settings implements Parsable
         $writer->writeBooleanValue('pastDueEntitlements', $this->getPastDueEntitlements());
         $writer->writeStringValue('productId', $this->getProductId());
         $writer->writeStringValue('successUrl', $this->getSuccessUrl());
+        $writer->writeObjectValue('trialCardBehaviour', $this->getTrialCardBehaviour());
         $writer->writeStringValue('updatedAt', $this->getUpdatedAt());
     }
 
@@ -300,6 +315,14 @@ class Settings implements Parsable
     */
     public function setSuccessUrl(?string $value): void {
         $this->successUrl = $value;
+    }
+
+    /**
+     * Sets the trialCardBehaviour property value. The trialCardBehaviour property
+     * @param Settings_trialCardBehaviour|null $value Value to set for the trialCardBehaviour property.
+    */
+    public function setTrialCardBehaviour(?Settings_trialCardBehaviour $value): void {
+        $this->trialCardBehaviour = $value;
     }
 
     /**

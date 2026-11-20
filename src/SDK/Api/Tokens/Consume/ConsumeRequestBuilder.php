@@ -31,7 +31,7 @@ class ConsumeRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * Consume a specified amount of tokens for an owner. Supports idempotency keys to prevent duplicate consumption.
+     * Consume a specified amount of tokens for an owner with a positive balance. Partial consumption is allowed if the current positive balance cannot cover the specified amount with the difference tracked as an overage. Supports idempotency keys to prevent duplicate consumption.
      * @param ConsumeTokenRequestSchema $body The request body
      * @param ConsumeRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
@@ -54,7 +54,7 @@ class ConsumeRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * Consume a specified amount of tokens for an owner. Supports idempotency keys to prevent duplicate consumption.
+     * Consume a specified amount of tokens for an owner with a positive balance. Partial consumption is allowed if the current positive balance cannot cover the specified amount with the difference tracked as an overage. Supports idempotency keys to prevent duplicate consumption.
      * @param ConsumeTokenRequestSchema $body The request body
      * @param ConsumeRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation

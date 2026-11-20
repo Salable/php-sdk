@@ -6,7 +6,7 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
-class DataPlanEntitlementsData implements Parsable 
+class LineItemToken implements Parsable 
 {
     /**
      * @var string|null $createdAt The createdAt property
@@ -29,6 +29,11 @@ class DataPlanEntitlementsData implements Parsable
     private ?string $organisation = null;
     
     /**
+     * @var string|null $slug The slug property
+    */
+    private ?string $slug = null;
+    
+    /**
      * @var string|null $updatedAt The updatedAt property
     */
     private ?string $updatedAt = null;
@@ -36,10 +41,10 @@ class DataPlanEntitlementsData implements Parsable
     /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return DataPlanEntitlementsData
+     * @return LineItemToken
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): DataPlanEntitlementsData {
-        return new DataPlanEntitlementsData();
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): LineItemToken {
+        return new LineItemToken();
     }
 
     /**
@@ -61,6 +66,7 @@ class DataPlanEntitlementsData implements Parsable
             'id' => fn(ParseNode $n) => $o->setId($n->getStringValue()),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
+            'slug' => fn(ParseNode $n) => $o->setSlug($n->getStringValue()),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
         ];
     }
@@ -90,6 +96,14 @@ class DataPlanEntitlementsData implements Parsable
     }
 
     /**
+     * Gets the slug property value. The slug property
+     * @return string|null
+    */
+    public function getSlug(): ?string {
+        return $this->slug;
+    }
+
+    /**
      * Gets the updatedAt property value. The updatedAt property
      * @return string|null
     */
@@ -106,6 +120,7 @@ class DataPlanEntitlementsData implements Parsable
         $writer->writeStringValue('id', $this->getId());
         $writer->writeStringValue('name', $this->getName());
         $writer->writeStringValue('organisation', $this->getOrganisation());
+        $writer->writeStringValue('slug', $this->getSlug());
         $writer->writeStringValue('updatedAt', $this->getUpdatedAt());
     }
 
@@ -139,6 +154,14 @@ class DataPlanEntitlementsData implements Parsable
     */
     public function setOrganisation(?string $value): void {
         $this->organisation = $value;
+    }
+
+    /**
+     * Sets the slug property value. The slug property
+     * @param string|null $value Value to set for the slug property.
+    */
+    public function setSlug(?string $value): void {
+        $this->slug = $value;
     }
 
     /**

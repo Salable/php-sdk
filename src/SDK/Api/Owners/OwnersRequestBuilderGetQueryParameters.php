@@ -33,7 +33,12 @@ class OwnersRequestBuilderGetQueryParameters
     public ?string $search = null;
     
     /**
-     * @var string|null $stripeCustomerId 
+     * @var string|null $stripeCustomer Filter by Stripe customer ID.
+    */
+    public ?string $stripeCustomer = null;
+    
+    /**
+     * @var string|null $stripeCustomerId Deprecated: use `stripeCustomer` instead.
     */
     public ?string $stripeCustomerId = null;
     
@@ -44,14 +49,16 @@ class OwnersRequestBuilderGetQueryParameters
      * @param array<GetExpandQueryParameterType>|null $expand 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
      * @param string|null $search 
-     * @param string|null $stripeCustomerId 
+     * @param string|null $stripeCustomer Filter by Stripe customer ID.
+     * @param string|null $stripeCustomerId Deprecated: use `stripeCustomer` instead.
     */
-    public function __construct(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?string $search = null, ?string $stripeCustomerId = null) {
+    public function __construct(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?string $search = null, ?string $stripeCustomer = null, ?string $stripeCustomerId = null) {
         $this->after = $after;
         $this->before = $before;
         $this->expand = $expand?? [];
         $this->limit = $limit;
         $this->search = $search;
+        $this->stripeCustomer = $stripeCustomer;
         $this->stripeCustomerId = $stripeCustomerId;
     }
 

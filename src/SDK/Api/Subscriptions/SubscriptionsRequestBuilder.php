@@ -44,7 +44,7 @@ class SubscriptionsRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/subscriptions{?after*,before*,expand,id*,limit*,owner*,plans,priceId*,products,search*,sort*,status*,stripePriceId*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/subscriptions{?after*,before*,expand,id*,limit*,owner*,plans,price*,priceId*,products,search*,sort*,status*,stripePrice*,stripePriceId*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

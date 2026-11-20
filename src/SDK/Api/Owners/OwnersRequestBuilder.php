@@ -9,6 +9,8 @@ use Microsoft\Kiota\Abstractions\HttpMethod;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
 use Microsoft\Kiota\Abstractions\RequestInformation;
 use Salable\SDK\Api\Owners\Item\OwnersItemRequestBuilder;
+use Salable\SDK\Models\CreateOwnerRequestSchema;
+use Salable\SDK\Models\CreateOwnerResponseSchema;
 use Salable\SDK\Models\ErrorResponseBody;
 use Salable\SDK\Models\GetOwnerListSchema;
 
@@ -34,7 +36,7 @@ class OwnersRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/owners{?after*,before*,expand,limit*,search*,stripeCustomerId*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/owners{?after*,before*,expand,limit*,search*,stripeCustomer*,stripeCustomerId*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -63,6 +65,28 @@ class OwnersRequestBuilder extends BaseRequestBuilder
     }
 
     /**
+     * Create Owner
+     * @param CreateOwnerRequestSchema $body The request body
+     * @param OwnersRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
+     * @return Promise<CreateOwnerResponseSchema|null>
+     * @throws Exception
+    */
+    public function post(CreateOwnerRequestSchema $body, ?OwnersRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
+        $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
+        $errorMappings = [
+                '400' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '401' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '403' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '404' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '405' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '409' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '429' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+                '500' => [ErrorResponseBody::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CreateOwnerResponseSchema::class, 'createFromDiscriminatorValue'], $errorMappings);
+    }
+
+    /**
      * List Owners
      * @param OwnersRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
@@ -80,6 +104,26 @@ class OwnersRequestBuilder extends BaseRequestBuilder
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
         $requestInfo->tryAddHeader('Accept', "application/json");
+        return $requestInfo;
+    }
+
+    /**
+     * Create Owner
+     * @param CreateOwnerRequestSchema $body The request body
+     * @param OwnersRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
+     * @return RequestInformation
+    */
+    public function toPostRequestInformation(CreateOwnerRequestSchema $body, ?OwnersRequestBuilderPostRequestConfiguration $requestConfiguration = null): RequestInformation {
+        $requestInfo = new RequestInformation();
+        $requestInfo->urlTemplate = $this->urlTemplate;
+        $requestInfo->pathParameters = $this->pathParameters;
+        $requestInfo->httpMethod = HttpMethod::POST;
+        if ($requestConfiguration !== null) {
+            $requestInfo->addHeaders($requestConfiguration->headers);
+            $requestInfo->addRequestOptions(...$requestConfiguration->options);
+        }
+        $requestInfo->tryAddHeader('Accept', "application/json");
+        $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }
 

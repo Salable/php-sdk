@@ -19,7 +19,7 @@ class UpdateCartRequestSchema implements Parsable
     private ?UpdateCartRequestSchema_currency $currency = null;
     
     /**
-     * @var string|null $owner The owner property
+     * @var string|null $owner An owner is the tenant a subscription, cart, receipt, or usage record belongs to. Usually a team, organization, or workspace ID, or the user ID for single-user products.
     */
     private ?string $owner = null;
     
@@ -56,13 +56,13 @@ class UpdateCartRequestSchema implements Parsable
         $o = $this;
         return  [
             'cartItems' => fn(ParseNode $n) => $o->setCartItems($n->getCollectionOfObjectValues([CartItems::class, 'createFromDiscriminatorValue'])),
-            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getEnumValue(UpdateCartRequestSchema_currency::class)),
+            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getObjectValue([UpdateCartRequestSchema_currency::class, 'createFromDiscriminatorValue'])),
             'owner' => fn(ParseNode $n) => $o->setOwner($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the owner property value. The owner property
+     * Gets the owner property value. An owner is the tenant a subscription, cart, receipt, or usage record belongs to. Usually a team, organization, or workspace ID, or the user ID for single-user products.
      * @return string|null
     */
     public function getOwner(): ?string {
@@ -75,7 +75,7 @@ class UpdateCartRequestSchema implements Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('cartItems', $this->getCartItems());
-        $writer->writeEnumValue('currency', $this->getCurrency());
+        $writer->writeObjectValue('currency', $this->getCurrency());
         $writer->writeStringValue('owner', $this->getOwner());
     }
 
@@ -96,7 +96,7 @@ class UpdateCartRequestSchema implements Parsable
     }
 
     /**
-     * Sets the owner property value. The owner property
+     * Sets the owner property value. An owner is the tenant a subscription, cart, receipt, or usage record belongs to. Usually a team, organization, or workspace ID, or the user ID for single-user products.
      * @param string|null $value Value to set for the owner property.
     */
     public function setOwner(?string $value): void {

@@ -28,7 +28,12 @@ class CartsRequestBuilderGetQueryParameters
     public ?int $limit = null;
     
     /**
-     * @var array<string>|null $ownerId Filter by owner ID. Accepts a comma-separated list of owner IDs.
+     * @var array<string>|null $owner Filter by owner ID. Accepts a comma-separated list of owner IDs.
+    */
+    public ?array $owner = null;
+    
+    /**
+     * @var array<string>|null $ownerId Deprecated: use `owner` instead.
     */
     public ?array $ownerId = null;
     
@@ -48,15 +53,17 @@ class CartsRequestBuilderGetQueryParameters
      * @param string|null $before Return records before this cursor for backwards pagination. Use the `previousCursor` from a previous response.
      * @param array<GetExpandQueryParameterType>|null $expand Expand related resources inline. Accepts a comma-separated list. Supported values: `owner`.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param array<string>|null $ownerId Filter by owner ID. Accepts a comma-separated list of owner IDs.
+     * @param array<string>|null $owner Filter by owner ID. Accepts a comma-separated list of owner IDs.
+     * @param array<string>|null $ownerId Deprecated: use `owner` instead.
      * @param string|null $search Search carts by ID.
      * @param array<GetStatusQueryParameterType>|null $status Filter by cart status. Accepts a comma-separated list. One of `active`, `abandoned`, `complete`.
     */
-    public function __construct(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?array $ownerId = null, ?string $search = null, ?array $status = null) {
+    public function __construct(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?array $owner = null, ?array $ownerId = null, ?string $search = null, ?array $status = null) {
         $this->after = $after;
         $this->before = $before;
         $this->expand = $expand?? [];
         $this->limit = $limit;
+        $this->owner = $owner;
         $this->ownerId = $ownerId;
         $this->search = $search;
         $this->status = $status?? [];

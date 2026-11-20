@@ -18,7 +18,12 @@ class DestinationsRequestBuilderGetQueryParameters
     public ?string $before = null;
     
     /**
-     * @var string|null $eventId Returns only destinations linked to this event ID.
+     * @var string|null $event Returns only destinations linked to this event ID.
+    */
+    public ?string $event = null;
+    
+    /**
+     * @var string|null $eventId Deprecated: use `event` instead.
     */
     public ?string $eventId = null;
     
@@ -31,12 +36,14 @@ class DestinationsRequestBuilderGetQueryParameters
      * Instantiates a new DestinationsRequestBuilderGetQueryParameters and sets the default values.
      * @param string|null $after 
      * @param string|null $before 
-     * @param string|null $eventId Returns only destinations linked to this event ID.
+     * @param string|null $event Returns only destinations linked to this event ID.
+     * @param string|null $eventId Deprecated: use `event` instead.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
     */
-    public function __construct(?string $after = null, ?string $before = null, ?string $eventId = null, ?int $limit = null) {
+    public function __construct(?string $after = null, ?string $before = null, ?string $event = null, ?string $eventId = null, ?int $limit = null) {
         $this->after = $after;
         $this->before = $before;
+        $this->event = $event;
         $this->eventId = $eventId;
         $this->limit = $limit;
     }

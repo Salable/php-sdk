@@ -32,13 +32,14 @@ class CartsRequestBuilderGetRequestConfiguration extends BaseRequestConfiguratio
      * @param string|null $before Return records before this cursor for backwards pagination. Use the `previousCursor` from a previous response.
      * @param array<GetExpandQueryParameterType>|null $expand Expand related resources inline. Accepts a comma-separated list. Supported values: `owner`.
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param array<string>|null $ownerId Filter by owner ID. Accepts a comma-separated list of owner IDs.
+     * @param array<string>|null $owner Filter by owner ID. Accepts a comma-separated list of owner IDs.
+     * @param array<string>|null $ownerId Deprecated: use `owner` instead.
      * @param string|null $search Search carts by ID.
      * @param array<GetStatusQueryParameterType>|null $status Filter by cart status. Accepts a comma-separated list. One of `active`, `abandoned`, `complete`.
      * @return CartsRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?array $ownerId = null, ?string $search = null, ?array $status = null): CartsRequestBuilderGetQueryParameters {
-        return new CartsRequestBuilderGetQueryParameters($after, $before, $expand, $limit, $ownerId, $search, $status);
+    public static function createQueryParameters(?string $after = null, ?string $before = null, ?array $expand = null, ?int $limit = null, ?array $owner = null, ?array $ownerId = null, ?string $search = null, ?array $status = null): CartsRequestBuilderGetQueryParameters {
+        return new CartsRequestBuilderGetQueryParameters($after, $before, $expand, $limit, $owner, $ownerId, $search, $status);
     }
 
 }

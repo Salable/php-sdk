@@ -52,6 +52,11 @@ class UpdateProductRequestSchemaSettings implements Parsable
     private ?string $successUrl = null;
     
     /**
+     * @var UpdateProductRequestSchemaSettings_trialCardBehaviour|null $trialCardBehaviour The default for whether a card is required at checkout for plans under this product. Applies only when trial days are set on the plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless.
+    */
+    private ?UpdateProductRequestSchemaSettings_trialCardBehaviour $trialCardBehaviour = null;
+    
+    /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
      * @return UpdateProductRequestSchemaSettings
@@ -123,6 +128,7 @@ class UpdateProductRequestSchemaSettings implements Parsable
             'collectShippingAddress' => fn(ParseNode $n) => $o->setCollectShippingAddress($n->getBooleanValue()),
             'pastDueEntitlements' => fn(ParseNode $n) => $o->setPastDueEntitlements($n->getBooleanValue()),
             'successUrl' => fn(ParseNode $n) => $o->setSuccessUrl($n->getStringValue()),
+            'trialCardBehaviour' => fn(ParseNode $n) => $o->setTrialCardBehaviour($n->getEnumValue(UpdateProductRequestSchemaSettings_trialCardBehaviour::class)),
         ];
     }
 
@@ -143,6 +149,14 @@ class UpdateProductRequestSchemaSettings implements Parsable
     }
 
     /**
+     * Gets the trialCardBehaviour property value. The default for whether a card is required at checkout for plans under this product. Applies only when trial days are set on the plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless.
+     * @return UpdateProductRequestSchemaSettings_trialCardBehaviour|null
+    */
+    public function getTrialCardBehaviour(): ?UpdateProductRequestSchemaSettings_trialCardBehaviour {
+        return $this->trialCardBehaviour;
+    }
+
+    /**
      * Serializes information the current object
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
@@ -155,6 +169,7 @@ class UpdateProductRequestSchemaSettings implements Parsable
         $writer->writeBooleanValue('collectShippingAddress', $this->getCollectShippingAddress());
         $writer->writeBooleanValue('pastDueEntitlements', $this->getPastDueEntitlements());
         $writer->writeStringValue('successUrl', $this->getSuccessUrl());
+        $writer->writeEnumValue('trialCardBehaviour', $this->getTrialCardBehaviour());
     }
 
     /**
@@ -219,6 +234,14 @@ class UpdateProductRequestSchemaSettings implements Parsable
     */
     public function setSuccessUrl(?string $value): void {
         $this->successUrl = $value;
+    }
+
+    /**
+     * Sets the trialCardBehaviour property value. The default for whether a card is required at checkout for plans under this product. Applies only when trial days are set on the plan or in the checkout. `always` sets the card to be required, `if_required` sets the checkout to be cardless.
+     * @param UpdateProductRequestSchemaSettings_trialCardBehaviour|null $value Value to set for the trialCardBehaviour property.
+    */
+    public function setTrialCardBehaviour(?UpdateProductRequestSchemaSettings_trialCardBehaviour $value): void {
+        $this->trialCardBehaviour = $value;
     }
 
 }

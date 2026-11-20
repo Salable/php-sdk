@@ -54,14 +54,19 @@ class DataSettings implements Parsable
     private ?bool $pastDueEntitlements = null;
     
     /**
-     * @var DataSettings_productId|null $productId The productId property
+     * @var string|null $productId The productId property
     */
-    private ?DataSettings_productId $productId = null;
+    private ?string $productId = null;
     
     /**
      * @var DataSettings_successUrl|null $successUrl The successUrl property
     */
     private ?DataSettings_successUrl $successUrl = null;
+    
+    /**
+     * @var DataSettings_trialCardBehaviour|null $trialCardBehaviour The trialCardBehaviour property
+    */
+    private ?DataSettings_trialCardBehaviour $trialCardBehaviour = null;
     
     /**
      * @var string|null $updatedAt The updatedAt property
@@ -141,8 +146,9 @@ class DataSettings implements Parsable
             'id' => fn(ParseNode $n) => $o->setId($n->getStringValue()),
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
             'pastDueEntitlements' => fn(ParseNode $n) => $o->setPastDueEntitlements($n->getBooleanValue()),
-            'productId' => fn(ParseNode $n) => $o->setProductId($n->getObjectValue([DataSettings_productId::class, 'createFromDiscriminatorValue'])),
+            'productId' => fn(ParseNode $n) => $o->setProductId($n->getStringValue()),
             'successUrl' => fn(ParseNode $n) => $o->setSuccessUrl($n->getObjectValue([DataSettings_successUrl::class, 'createFromDiscriminatorValue'])),
+            'trialCardBehaviour' => fn(ParseNode $n) => $o->setTrialCardBehaviour($n->getObjectValue([DataSettings_trialCardBehaviour::class, 'createFromDiscriminatorValue'])),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
         ];
     }
@@ -173,9 +179,9 @@ class DataSettings implements Parsable
 
     /**
      * Gets the productId property value. The productId property
-     * @return DataSettings_productId|null
+     * @return string|null
     */
-    public function getProductId(): ?DataSettings_productId {
+    public function getProductId(): ?string {
         return $this->productId;
     }
 
@@ -185,6 +191,14 @@ class DataSettings implements Parsable
     */
     public function getSuccessUrl(): ?DataSettings_successUrl {
         return $this->successUrl;
+    }
+
+    /**
+     * Gets the trialCardBehaviour property value. The trialCardBehaviour property
+     * @return DataSettings_trialCardBehaviour|null
+    */
+    public function getTrialCardBehaviour(): ?DataSettings_trialCardBehaviour {
+        return $this->trialCardBehaviour;
     }
 
     /**
@@ -209,8 +223,9 @@ class DataSettings implements Parsable
         $writer->writeStringValue('id', $this->getId());
         $writer->writeStringValue('organisation', $this->getOrganisation());
         $writer->writeBooleanValue('pastDueEntitlements', $this->getPastDueEntitlements());
-        $writer->writeObjectValue('productId', $this->getProductId());
+        $writer->writeStringValue('productId', $this->getProductId());
         $writer->writeObjectValue('successUrl', $this->getSuccessUrl());
+        $writer->writeObjectValue('trialCardBehaviour', $this->getTrialCardBehaviour());
         $writer->writeStringValue('updatedAt', $this->getUpdatedAt());
     }
 
@@ -288,9 +303,9 @@ class DataSettings implements Parsable
 
     /**
      * Sets the productId property value. The productId property
-     * @param DataSettings_productId|null $value Value to set for the productId property.
+     * @param string|null $value Value to set for the productId property.
     */
-    public function setProductId(?DataSettings_productId $value): void {
+    public function setProductId(?string $value): void {
         $this->productId = $value;
     }
 
@@ -300,6 +315,14 @@ class DataSettings implements Parsable
     */
     public function setSuccessUrl(?DataSettings_successUrl $value): void {
         $this->successUrl = $value;
+    }
+
+    /**
+     * Sets the trialCardBehaviour property value. The trialCardBehaviour property
+     * @param DataSettings_trialCardBehaviour|null $value Value to set for the trialCardBehaviour property.
+    */
+    public function setTrialCardBehaviour(?DataSettings_trialCardBehaviour $value): void {
+        $this->trialCardBehaviour = $value;
     }
 
     /**

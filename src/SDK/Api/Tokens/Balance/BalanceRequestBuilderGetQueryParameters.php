@@ -8,7 +8,7 @@ namespace Salable\SDK\Api\Tokens\Balance;
 class BalanceRequestBuilderGetQueryParameters 
 {
     /**
-     * @var string|null $owner Owner value to retrieve the active token balances for.
+     * @var string|null $owner Owner value to retrieve the token balances for.
     */
     public ?string $owner = null;
     
@@ -24,7 +24,7 @@ class BalanceRequestBuilderGetQueryParameters
     
     /**
      * Instantiates a new BalanceRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $owner Owner value to retrieve the active token balances for.
+     * @param string|null $owner Owner value to retrieve the token balances for.
      * @param string|null $source Receipt item or Subscription plan line item ID to retrieve the token balance for.
      * @param string|null $token Token slug to retrieve the balance for. If omitted all tokens will be returned for the specified owner.
     */

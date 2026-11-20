@@ -6,7 +6,7 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
-class Grantees implements Parsable 
+class CreateGroupRequestSchemaGrantees implements Parsable 
 {
     /**
      * @var string|null $granteeId The granteeId property
@@ -21,10 +21,10 @@ class Grantees implements Parsable
     /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return Grantees
+     * @return CreateGroupRequestSchemaGrantees
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): Grantees {
-        return new Grantees();
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): CreateGroupRequestSchemaGrantees {
+        return new CreateGroupRequestSchemaGrantees();
     }
 
     /**

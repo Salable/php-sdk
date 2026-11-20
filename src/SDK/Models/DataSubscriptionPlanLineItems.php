@@ -9,7 +9,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class DataSubscriptionPlanLineItems implements Parsable 
 {
     /**
-     * @var array<ApiSubscriptionPlansIdGetDataSubscriptionPlanLin>|null $data The data property
+     * @var array<ApiSubscriptionPlansIdGetDataSubscriptio2>|null $data The data property
     */
     private ?array $data = null;
     
@@ -39,7 +39,7 @@ class DataSubscriptionPlanLineItems implements Parsable
 
     /**
      * Gets the data property value. The data property
-     * @return array<ApiSubscriptionPlansIdGetDataSubscriptionPlanLin>|null
+     * @return array<ApiSubscriptionPlansIdGetDataSubscriptio2>|null
     */
     public function getData(): ?array {
         return $this->data;
@@ -52,7 +52,7 @@ class DataSubscriptionPlanLineItems implements Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'data' => fn(ParseNode $n) => $o->setData($n->getCollectionOfObjectValues([ApiSubscriptionPlansIdGetDataSubscriptionPlanLin::class, 'createFromDiscriminatorValue'])),
+            'data' => fn(ParseNode $n) => $o->setData($n->getCollectionOfObjectValues([ApiSubscriptionPlansIdGetDataSubscriptio2::class, 'createFromDiscriminatorValue'])),
             'hasMore' => fn(ParseNode $n) => $o->setHasMore($n->getBooleanValue()),
             'path' => fn(ParseNode $n) => $o->setPath($n->getStringValue()),
             'type' => fn(ParseNode $n) => $o->setType($n->getStringValue()),
@@ -96,7 +96,7 @@ class DataSubscriptionPlanLineItems implements Parsable
 
     /**
      * Sets the data property value. The data property
-     * @param array<ApiSubscriptionPlansIdGetDataSubscriptionPlanLin>|null $value Value to set for the data property.
+     * @param array<ApiSubscriptionPlansIdGetDataSubscriptio2>|null $value Value to set for the data property.
     */
     public function setData(?array $value): void {
         $this->data = $value;

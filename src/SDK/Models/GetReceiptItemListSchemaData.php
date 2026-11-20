@@ -6,13 +6,8 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
-class RecordsData implements Parsable 
+class GetReceiptItemListSchemaData implements Parsable 
 {
-    /**
-     * @var int|null $count The count property
-    */
-    private ?int $count = null;
-    
     /**
      * @var string|null $createdAt The createdAt property
     */
@@ -24,19 +19,24 @@ class RecordsData implements Parsable
     private ?string $id = null;
     
     /**
+     * @var string|null $lineItemStripeProductId The lineItemStripeProductId property
+    */
+    private ?string $lineItemStripeProductId = null;
+    
+    /**
      * @var string|null $organisation The organisation property
     */
     private ?string $organisation = null;
     
     /**
-     * @var string|null $ownerId The ownerId property
+     * @var int|null $quantity The quantity property
     */
-    private ?string $ownerId = null;
+    private ?int $quantity = null;
     
     /**
-     * @var RecordsData_recordedAt|null $recordedAt The recordedAt property
+     * @var string|null $receiptId The receiptId property
     */
-    private ?RecordsData_recordedAt $recordedAt = null;
+    private ?string $receiptId = null;
     
     /**
      * @var string|null $updatedAt The updatedAt property
@@ -44,25 +44,12 @@ class RecordsData implements Parsable
     private ?string $updatedAt = null;
     
     /**
-     * @var string|null $usageId The usageId property
-    */
-    private ?string $usageId = null;
-    
-    /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return RecordsData
+     * @return GetReceiptItemListSchemaData
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): RecordsData {
-        return new RecordsData();
-    }
-
-    /**
-     * Gets the count property value. The count property
-     * @return int|null
-    */
-    public function getCount(): ?int {
-        return $this->count;
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): GetReceiptItemListSchemaData {
+        return new GetReceiptItemListSchemaData();
     }
 
     /**
@@ -80,14 +67,13 @@ class RecordsData implements Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'count' => fn(ParseNode $n) => $o->setCount($n->getIntegerValue()),
             'createdAt' => fn(ParseNode $n) => $o->setCreatedAt($n->getStringValue()),
             'id' => fn(ParseNode $n) => $o->setId($n->getStringValue()),
+            'lineItemStripeProductId' => fn(ParseNode $n) => $o->setLineItemStripeProductId($n->getStringValue()),
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
-            'ownerId' => fn(ParseNode $n) => $o->setOwnerId($n->getStringValue()),
-            'recordedAt' => fn(ParseNode $n) => $o->setRecordedAt($n->getObjectValue([RecordsData_recordedAt::class, 'createFromDiscriminatorValue'])),
+            'quantity' => fn(ParseNode $n) => $o->setQuantity($n->getIntegerValue()),
+            'receiptId' => fn(ParseNode $n) => $o->setReceiptId($n->getStringValue()),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
-            'usageId' => fn(ParseNode $n) => $o->setUsageId($n->getStringValue()),
         ];
     }
 
@@ -100,6 +86,14 @@ class RecordsData implements Parsable
     }
 
     /**
+     * Gets the lineItemStripeProductId property value. The lineItemStripeProductId property
+     * @return string|null
+    */
+    public function getLineItemStripeProductId(): ?string {
+        return $this->lineItemStripeProductId;
+    }
+
+    /**
      * Gets the organisation property value. The organisation property
      * @return string|null
     */
@@ -108,19 +102,19 @@ class RecordsData implements Parsable
     }
 
     /**
-     * Gets the ownerId property value. The ownerId property
-     * @return string|null
+     * Gets the quantity property value. The quantity property
+     * @return int|null
     */
-    public function getOwnerId(): ?string {
-        return $this->ownerId;
+    public function getQuantity(): ?int {
+        return $this->quantity;
     }
 
     /**
-     * Gets the recordedAt property value. The recordedAt property
-     * @return RecordsData_recordedAt|null
+     * Gets the receiptId property value. The receiptId property
+     * @return string|null
     */
-    public function getRecordedAt(): ?RecordsData_recordedAt {
-        return $this->recordedAt;
+    public function getReceiptId(): ?string {
+        return $this->receiptId;
     }
 
     /**
@@ -132,34 +126,17 @@ class RecordsData implements Parsable
     }
 
     /**
-     * Gets the usageId property value. The usageId property
-     * @return string|null
-    */
-    public function getUsageId(): ?string {
-        return $this->usageId;
-    }
-
-    /**
      * Serializes information the current object
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeIntegerValue('count', $this->getCount());
         $writer->writeStringValue('createdAt', $this->getCreatedAt());
         $writer->writeStringValue('id', $this->getId());
+        $writer->writeStringValue('lineItemStripeProductId', $this->getLineItemStripeProductId());
         $writer->writeStringValue('organisation', $this->getOrganisation());
-        $writer->writeStringValue('ownerId', $this->getOwnerId());
-        $writer->writeObjectValue('recordedAt', $this->getRecordedAt());
+        $writer->writeIntegerValue('quantity', $this->getQuantity());
+        $writer->writeStringValue('receiptId', $this->getReceiptId());
         $writer->writeStringValue('updatedAt', $this->getUpdatedAt());
-        $writer->writeStringValue('usageId', $this->getUsageId());
-    }
-
-    /**
-     * Sets the count property value. The count property
-     * @param int|null $value Value to set for the count property.
-    */
-    public function setCount(?int $value): void {
-        $this->count = $value;
     }
 
     /**
@@ -179,6 +156,14 @@ class RecordsData implements Parsable
     }
 
     /**
+     * Sets the lineItemStripeProductId property value. The lineItemStripeProductId property
+     * @param string|null $value Value to set for the lineItemStripeProductId property.
+    */
+    public function setLineItemStripeProductId(?string $value): void {
+        $this->lineItemStripeProductId = $value;
+    }
+
+    /**
      * Sets the organisation property value. The organisation property
      * @param string|null $value Value to set for the organisation property.
     */
@@ -187,19 +172,19 @@ class RecordsData implements Parsable
     }
 
     /**
-     * Sets the ownerId property value. The ownerId property
-     * @param string|null $value Value to set for the ownerId property.
+     * Sets the quantity property value. The quantity property
+     * @param int|null $value Value to set for the quantity property.
     */
-    public function setOwnerId(?string $value): void {
-        $this->ownerId = $value;
+    public function setQuantity(?int $value): void {
+        $this->quantity = $value;
     }
 
     /**
-     * Sets the recordedAt property value. The recordedAt property
-     * @param RecordsData_recordedAt|null $value Value to set for the recordedAt property.
+     * Sets the receiptId property value. The receiptId property
+     * @param string|null $value Value to set for the receiptId property.
     */
-    public function setRecordedAt(?RecordsData_recordedAt $value): void {
-        $this->recordedAt = $value;
+    public function setReceiptId(?string $value): void {
+        $this->receiptId = $value;
     }
 
     /**
@@ -208,14 +193,6 @@ class RecordsData implements Parsable
     */
     public function setUpdatedAt(?string $value): void {
         $this->updatedAt = $value;
-    }
-
-    /**
-     * Sets the usageId property value. The usageId property
-     * @param string|null $value Value to set for the usageId property.
-    */
-    public function setUsageId(?string $value): void {
-        $this->usageId = $value;
     }
 
 }

@@ -14,7 +14,7 @@ class UpdateGroupRequestSchema implements Parsable
     private ?array $grantees = null;
     
     /**
-     * @var string|null $id The id property
+     * @var string|null $id Deprecated: this property is no longer required and will be removed in the next API version.
     */
     private ?string $id = null;
     
@@ -54,7 +54,7 @@ class UpdateGroupRequestSchema implements Parsable
     }
 
     /**
-     * Gets the id property value. The id property
+     * Gets the id property value. Deprecated: this property is no longer required and will be removed in the next API version.
      * @return string|null
     */
     public function getId(): ?string {
@@ -88,7 +88,7 @@ class UpdateGroupRequestSchema implements Parsable
     }
 
     /**
-     * Sets the id property value. The id property
+     * Sets the id property value. Deprecated: this property is no longer required and will be removed in the next API version.
      * @param string|null $value Value to set for the id property.
     */
     public function setId(?string $value): void {

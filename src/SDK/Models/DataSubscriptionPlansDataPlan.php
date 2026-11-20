@@ -55,9 +55,9 @@ class DataSubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
     private ?string $productId = null;
     
     /**
-     * @var DataPlanTierTag|null $tierTag The tierTag property
+     * @var SubscriptionPlansDataPlanTierTag|null $tierTag The tierTag property
     */
-    private ?DataPlanTierTag $tierTag = null;
+    private ?SubscriptionPlansDataPlanTierTag $tierTag = null;
     
     /**
      * @var DataSubscriptionPlansDataPlan_tierTagId|null $tierTagId The tierTagId property
@@ -129,7 +129,7 @@ class DataSubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
             'organisation' => fn(ParseNode $n) => $o->setOrganisation($n->getStringValue()),
             'productId' => fn(ParseNode $n) => $o->setProductId($n->getStringValue()),
-            'tierTag' => fn(ParseNode $n) => $o->setTierTag($n->getObjectValue([DataPlanTierTag::class, 'createFromDiscriminatorValue'])),
+            'tierTag' => fn(ParseNode $n) => $o->setTierTag($n->getObjectValue([SubscriptionPlansDataPlanTierTag::class, 'createFromDiscriminatorValue'])),
             'tierTagId' => fn(ParseNode $n) => $o->setTierTagId($n->getObjectValue([DataSubscriptionPlansDataPlan_tierTagId::class, 'createFromDiscriminatorValue'])),
             'trialPeriodDays' => fn(ParseNode $n) => $o->setTrialPeriodDays($n->getObjectValue([DataSubscriptionPlansDataPlan_trialPeriodDays::class, 'createFromDiscriminatorValue'])),
             'updatedAt' => fn(ParseNode $n) => $o->setUpdatedAt($n->getStringValue()),
@@ -186,9 +186,9 @@ class DataSubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the tierTag property value. The tierTag property
-     * @return DataPlanTierTag|null
+     * @return SubscriptionPlansDataPlanTierTag|null
     */
-    public function getTierTag(): ?DataPlanTierTag {
+    public function getTierTag(): ?SubscriptionPlansDataPlanTierTag {
         return $this->tierTag;
     }
 
@@ -310,9 +310,9 @@ class DataSubscriptionPlansDataPlan implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the tierTag property value. The tierTag property
-     * @param DataPlanTierTag|null $value Value to set for the tierTag property.
+     * @param SubscriptionPlansDataPlanTierTag|null $value Value to set for the tierTag property.
     */
-    public function setTierTag(?DataPlanTierTag $value): void {
+    public function setTierTag(?SubscriptionPlansDataPlanTierTag $value): void {
         $this->tierTag = $value;
     }
 

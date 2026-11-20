@@ -14,9 +14,14 @@ class UpdateOwnerRequestSchema implements Parsable
     private ?string $email = null;
     
     /**
-     * @var string|null $owner The owner property
+     * @var string|null $owner Deprecated: use `value` instead.
     */
     private ?string $owner = null;
+    
+    /**
+     * @var string|null $value The unique value used to identify the owner.
+    */
+    private ?string $value = null;
     
     /**
      * Creates a new instance of the appropriate class based on discriminator value
@@ -44,15 +49,24 @@ class UpdateOwnerRequestSchema implements Parsable
         return  [
             'email' => fn(ParseNode $n) => $o->setEmail($n->getStringValue()),
             'owner' => fn(ParseNode $n) => $o->setOwner($n->getStringValue()),
+            'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the owner property value. The owner property
+     * Gets the owner property value. Deprecated: use `value` instead.
      * @return string|null
     */
     public function getOwner(): ?string {
         return $this->owner;
+    }
+
+    /**
+     * Gets the value property value. The unique value used to identify the owner.
+     * @return string|null
+    */
+    public function getValue(): ?string {
+        return $this->value;
     }
 
     /**
@@ -62,6 +76,7 @@ class UpdateOwnerRequestSchema implements Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('email', $this->getEmail());
         $writer->writeStringValue('owner', $this->getOwner());
+        $writer->writeStringValue('value', $this->getValue());
     }
 
     /**
@@ -73,11 +88,19 @@ class UpdateOwnerRequestSchema implements Parsable
     }
 
     /**
-     * Sets the owner property value. The owner property
+     * Sets the owner property value. Deprecated: use `value` instead.
      * @param string|null $value Value to set for the owner property.
     */
     public function setOwner(?string $value): void {
         $this->owner = $value;
+    }
+
+    /**
+     * Sets the value property value. The unique value used to identify the owner.
+     * @param string|null $value Value to set for the value property.
+    */
+    public function setValue(?string $value): void {
+        $this->value = $value;
     }
 
 }

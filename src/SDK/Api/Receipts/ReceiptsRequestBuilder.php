@@ -42,7 +42,7 @@ class ReceiptsRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/receipts{?after*,before*,expand,limit*,lineItems,owner,search*,sort*,subscriptionId*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/receipts{?after*,before*,expand,limit*,lineItems,owner,search*,sort*,subscription*,subscriptionId*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

@@ -8,6 +8,7 @@ use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\HttpMethod;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
 use Microsoft\Kiota\Abstractions\RequestInformation;
+use Salable\SDK\Api\Grantees\Batch\BatchRequestBuilder;
 use Salable\SDK\Api\Grantees\Item\GranteesItemRequestBuilder;
 use Salable\SDK\Models\CreateGranteeRequestSchema;
 use Salable\SDK\Models\CreateGranteeResponseSchema;
@@ -19,6 +20,13 @@ use Salable\SDK\Models\GetGranteeListSchema;
 */
 class GranteesRequestBuilder extends BaseRequestBuilder 
 {
+    /**
+     * The batch property
+    */
+    public function batch(): BatchRequestBuilder {
+        return new BatchRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
     /**
      * Gets an item from the Salable/SDK.api.grantees.item collection
      * @param string $id Resource ID
@@ -36,7 +44,7 @@ class GranteesRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/grantees{?after*,before*,groupId*,limit*,search*}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/grantees{?after*,before*,entitlement*,group*,groupId*,limit*,owner*,search*}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

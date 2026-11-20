@@ -44,7 +44,7 @@ class CartsRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/api/carts{?after*,before*,expand,limit*,ownerId,search*,status}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/api/carts{?after*,before*,expand,limit*,owner,ownerId,search*,status}');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {

@@ -23,7 +23,12 @@ class LineItemsRequestBuilderGetQueryParameters
     public ?int $limit = null;
     
     /**
-     * @var string|null $planId Returns only line items linked to this plan ID.
+     * @var string|null $plan Returns only line items linked to this plan ID.
+    */
+    public ?string $plan = null;
+    
+    /**
+     * @var string|null $planId Deprecated: use `plan` instead.
     */
     public ?string $planId = null;
     
@@ -37,13 +42,15 @@ class LineItemsRequestBuilderGetQueryParameters
      * @param string|null $after 
      * @param string|null $before 
      * @param int|null $limit The number of records returned in a response. Value between 1 and 100. Defaults to 25.
-     * @param string|null $planId Returns only line items linked to this plan ID.
+     * @param string|null $plan Returns only line items linked to this plan ID.
+     * @param string|null $planId Deprecated: use `plan` instead.
      * @param string|null $search 
     */
-    public function __construct(?string $after = null, ?string $before = null, ?int $limit = null, ?string $planId = null, ?string $search = null) {
+    public function __construct(?string $after = null, ?string $before = null, ?int $limit = null, ?string $plan = null, ?string $planId = null, ?string $search = null) {
         $this->after = $after;
         $this->before = $before;
         $this->limit = $limit;
+        $this->plan = $plan;
         $this->planId = $planId;
         $this->search = $search;
     }

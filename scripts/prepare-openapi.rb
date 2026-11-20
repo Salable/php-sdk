@@ -280,10 +280,23 @@ def finish(spec, label)
   exit 0
 end
 
+def deep_copy(node)
+  case node
+  when Hash
+    node.each_with_object({}) { |(key, value), copy| copy[deep_copy(key)] = deep_copy(value) }
+  when Array
+    node.map { |value| deep_copy(value) }
+  else
+    node.dup
+  end
+rescue TypeError
+  node
+end
+
 source = ENV["SOURCE"] || PATH
 # Expand YAML aliases into independent copies so extraction cannot alias a
 # schema onto itself.
-spec = YAML.load(YAML.dump(YAML.load_file(source)))
+spec = deep_copy(YAML.safe_load(File.read(source), aliases: true))
 stage = ENV["STAGE"] || "all"
 schemas = spec["components"]["schemas"]
 raise "components.schemas missing" unless schemas.is_a?(Hash)
