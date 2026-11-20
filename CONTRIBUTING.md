@@ -49,6 +49,10 @@ composer require salable/sdk:^1.0@beta
 
 Merge `beta` into `main` only after the OpenAPI names have settled. A push to `main` tags the stable `v1.0.0` line, which is the compatibility promise. Until that merge, do not push these commits to `main`.
 
+semantic-release tags the release and writes `CHANGELOG.md`. It authenticates with a GitHub App token, the same way the Ruby SDK does. The app needs repository permissions **Contents**, **Issues**, and **Pull requests** set to read and write. Leave the webhook inactive.
+
+Create the app on the Salable organization so it can be installed on `Salable/php-sdk`. On the repository, set the Actions secret `PRIVATE_KEY` to the app private key, and set `CLIENT_ID` as either an Actions secret or a repository variable. The release workflow reads `secrets.CLIENT_ID` first, then `vars.CLIENT_ID`.
+
 ## Packagist
 
 semantic-release creates the GitHub tag and changelog. Beta tags are GitHub prereleases. Packagist publishes `salable/sdk` from those tags, including `v1.0.0-beta.N`, only after a one-time setup:
