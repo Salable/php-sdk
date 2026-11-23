@@ -4,17 +4,6 @@ on:
   push:
     branches: [main, beta]
   workflow_dispatch:
-    inputs:
-      spec_change:
-        description: Conventional commit type when this run should record a spec change. Choose none to release commits that are already on the branch.
-        required: true
-        default: none
-        type: choice
-        options:
-          - none
-          - feat
-          - fix
-          - breaking
 
 jobs:
   test:
@@ -99,23 +88,46 @@ jobs:
       - name: Install semantic-release
         run: npm ci
 
-      - name: Record spec change
-        if: github.event_name == 'workflow_dispatch' && inputs.spec_change != 'none'
+      - uses: shivammathur/setup-php@v2
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          php-version: "8.2"
+          coverage: none
+          tools: composer:v2
+
+      - uses: microsoft/setup-kiota@v0.5.0
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          version: v1.35.0
+
+      - name: Fetch OpenAPI spec
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          curl -fsSL --fail \
+            https://salable.app/openapi.yaml \
+            -o openapi.yaml
+          SOURCE=openapi.yaml ruby scripts/prepare-openapi.rb
+
+      - name: Generate SDK with Kiota
+        if: github.event_name == 'workflow_dispatch'
+        run: ./scripts/generate.sh
+
+      - name: Test generated client
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          composer validate --strict
+          composer install --no-interaction --prefer-dist
+          vendor/bin/php-cs-fixer fix --dry-run --diff
+          vendor/bin/phpstan analyse --no-progress
+          vendor/bin/phpunit
+
+      - name: Commit for semantic release
+        if: github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          case "${{ inputs.spec_change }}" in
-            feat)
-              git commit --allow-empty -m "feat: openapi spec updated"
-              ;;
-            fix)
-              git commit --allow-empty -m "fix: openapi spec updated"
-              ;;
-            breaking)
-              git commit --allow-empty -m "feat!: openapi spec updated" -m "BREAKING CHANGE: OpenAPI spec update"
-              ;;
-          esac
-          git push origin HEAD
+          git add -A openapi.yaml src/SDK
+          git commit --allow-empty -m "fix: openapi spec updated"
 
       - name: Release
         run: npx semantic-release

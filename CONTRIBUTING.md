@@ -6,9 +6,9 @@ The supported PHP versions are 8.2, 8.3, 8.4, and 8.5.
 
 Do not edit files under `src/SDK/`. Kiota overwrites that tree. Changes that should survive regeneration belong in `src/Salable.php`, `src/ApiKeyAccessTokenProvider.php`, or in `openapi.yaml`.
 
-`openapi.yaml` is the pinned description. Release builds generate from this file and fail if `src/SDK/` does not match it.
+`openapi.yaml` is the pinned description. The drift check generates from this file and fails if `src/SDK/` does not match it.
 
-To refresh the description from the published Salable spec:
+A dispatched release downloads the published spec, prepares it, regenerates the client, and commits that result as `fix: openapi spec updated`. To refresh the description locally:
 
 ```bash
 curl -fsSL https://salable.app/openapi.yaml -o openapi.yaml
