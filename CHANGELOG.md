@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/Salable/php-sdk/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2026-11-23)
+
+
+### Bug Fixes
+
+* regenerate the client when a release is dispatched ([3137a0c](https://github.com/Salable/php-sdk/commit/3137a0c93650e4f0d099347fef783f80d927cfbe))
+
 # 1.0.0-beta.1 (2026-11-20)
 
 
